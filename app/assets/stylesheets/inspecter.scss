@@ -1,0 +1,10 @@
+/*
+ *= require_self
+ */
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import 'inspecter/base/dashboard';
+@import 'inspecter/farms/index';
+@import 'inspecter/cameras/index';
+@import 'inspecter/sensors/index';
