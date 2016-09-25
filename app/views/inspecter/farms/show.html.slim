@@ -1,0 +1,9 @@
+#inspecter-farms-show-container
+  .cameras-container
+    h1 Cameras
+    - @cameras.each do |camera|
+      = link_to "Camera #{camera.id}", inspecter_farm_camera_path(camera)
+  .sensors-container
+    h1 Sensors
+
+  

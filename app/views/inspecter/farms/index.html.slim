@@ -1,2 +1,4 @@
 #inspecter-farms-index-container
   h1 Farms index
+  - @farms.each do |farm|
+      = link_to "Farm #{farm.id}", inspecter_farm_path(farm)

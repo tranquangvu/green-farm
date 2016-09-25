@@ -1,2 +1,4 @@
 #inspecter-cameras-index-container
   h1 Cameras index
+  - @cameras.each do |camera|
+      = link_to "Camera #{camera.id}", inspecter_farm_camera(camera)

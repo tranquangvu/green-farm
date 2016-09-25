@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   root 'landing#home'
 
   namespace :inspecter do
-    root 'base#dashboard'
-    
-    resources :farms, only: [:index]
-    resources :cameras, only: [:index]
-    resources :sensors, only: [:index]
+    root 'base#dashboard', as: :dashboard
+
+    resources :farms, only: [:index, :show] do
+      resources :cameras, only: [:index, :show]
+      resources :sensors, only: [:index]
+    end
   end
 end
