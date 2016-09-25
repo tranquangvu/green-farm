@@ -1,4 +1,10 @@
 class Camera < ApplicationRecord
+  belongs_to :farm
+
+  validates :ip, presence: true
+  validates :port, presence: true
+  validates :access_token, presence: true
+
   def host
     "#{ip}:#{port}"
   end
