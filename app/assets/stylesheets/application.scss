@@ -3,6 +3,11 @@
  */
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'https://fonts.googleapis.com/css?family=Droid+Serif|Raleway:700';
+@import 'owl.carousel';
+@import 'owl.theme';
 
 @import 'landing/home';
 
@@ -16,4 +21,39 @@
 
 .alert-notice {
   @extend .alert-info; 
+}
+
+a{
+  display: inline-table;
+}
+
+.active{
+  color: #FFF !important;
+  background-color: #6AB42F !important;
+}
+
+.invis{
+  margin: 30px 0;
+  border: 0;
+}
+
+#loader{
+  overflow: hidden !important;
+  vertical-align: middle;
+  background-color: #ffffff;
+  position: fixed;
+  display: table;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  min-height: 100%;
+  z-index: 99999;
+
+  .loader-container {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 12;
+    text-align: center;
+  }
 }
