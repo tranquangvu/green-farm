@@ -14,6 +14,9 @@ gem 'slim', '~> 3.0', '>= 3.0.7'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
 gem 'factory_girl'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'bootstrap-select-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'

@@ -5,11 +5,14 @@
 @import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-@import 'https://fonts.googleapis.com/css?family=Droid+Serif|Raleway:700';
+/*@import 'https://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans|Raleway:400,600,700|Shadows+Into+Light&subset=vietnamese';*/
 @import 'owl.carousel';
 @import 'owl.theme';
+@import 'bootstrap-datetimepicker';
+@import 'bootstrap-select';
 
 @import 'landing/home';
+@import 'fonts';
 
 .alert-error {
   @extend .alert-danger;
@@ -25,6 +28,10 @@
 
 a{
   display: inline-table;
+}
+
+a:hover, a:focus{
+  text-decoration: none;
 }
 
 .active{
@@ -57,3 +64,50 @@ a{
     text-align: center;
   }
 }
+
+/*custom datetimepicker*/
+
+.bootstrap-datetimepicker-widget.dropdown-menu{
+  border-radius: 0;
+  width: calc(100% - 30px);
+}
+
+.datepicker-days .table-condensed thead tr:nth-child(1) th:hover{
+  color: #FFF;
+  border-color: #222;
+  background-color: #222;
+}
+
+.datepicker-days .table-condensed thead tr:nth-child(1){
+  color: #FFF;
+  border-color: #222;
+  background-color: #222;
+
+  th{
+    border-radius: 0;
+  }
+
+  span{
+    color: #5aa320;
+  }
+
+  span:hover{
+    color: #FFF;
+    border-color: #222;
+    background-color: #222;
+  }
+}
+
+.bootstrap-datetimepicker-widget table td.today:before{
+  border-bottom-color: #5aa320;
+}
+
+.bootstrap-datetimepicker-widget .table-condensed a{
+  color: #5aa320;
+}
+
+.bootstrap-datetimepicker-widget .btn-primary,.bootstrap-datetimepicker-widget .btn-primary:hover{
+  border-color: #5aa320;
+  background-color: #5aa320;
+}
+
