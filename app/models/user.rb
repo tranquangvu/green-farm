@@ -36,7 +36,7 @@ class User
   # field :locked_at,       type: Time
 
   # asssocations
-  embeds_many :farms
+  has_many :farms
   
   # validations
   validates :username, presence: true, length: {minimum: 3, maximum: 15}

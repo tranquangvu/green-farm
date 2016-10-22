@@ -15,7 +15,7 @@ farm = user.farms.create(
   address: '666/64/5 Ly Thuong Kiet, TPHCM'
 )
 
-farm.cameras.create(CameraCreating.build(
+farm.create_camera(CameraCreating.build(
   ip: 'http://je4452.myfoscam.org',
   port: '133',
   username: 'guest',

@@ -8,7 +8,7 @@ class Camera
   field :access_token, type: String
 
   # associations
-  embedded_in :farm
+  belongs_to :farm
 
   # validations
   validates :ip, presence: true
