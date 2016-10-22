@@ -9,7 +9,6 @@
 
 $(window).load(function() {
   $('#loader').delay(1400).fadeOut('slow');
-  $('#loader-container').delay(100).fadeOut('slow');
   $('body').delay(300).css({'overflow':'visible'});
 })
 

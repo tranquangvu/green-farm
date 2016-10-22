@@ -8,6 +8,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = render 'shared/favicon'
   body
-    = render 'shared/loader'
+    - if params[:controller] == 'landing'
+      = render 'shared/loader'
     = render 'shared/flash_message'
     = yield

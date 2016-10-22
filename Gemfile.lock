@@ -45,10 +45,10 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    bson (4.1.1)
     bootstrap-select-rails (1.6.3)
     bootstrap3-datetimepicker-rails (4.17.42)
       momentjs-rails (>= 2.8.1)
+    bson (4.1.1)
     builder (3.2.2)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -109,13 +109,13 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     mongo (2.3.0)
       bson (~> 4.1)
     mongoid (6.0.2)
       activemodel (~> 5.0)
       mongo (~> 2.3)
-    momentjs-rails (2.15.1)
-      railties (>= 3.1)
     multi_json (1.12.1)
     nio4r (1.2.1)
     nokogiri (1.6.8)
@@ -257,16 +257,9 @@ DEPENDENCIES
   jquery-rails
   jwt
   listen (~> 3.0.5)
-<<<<<<< HEAD
-<<<<<<< HEAD
-  mongoid (~> 6.0.0)
-=======
-=======
   momentjs-rails
->>>>>>> Layout home page
+  mongoid (~> 6.0.0)
   owlcarousel-rails
-  pg
->>>>>>> Layout (WIP: header, section offer)
   pry-rails
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
