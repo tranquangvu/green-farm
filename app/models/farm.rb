@@ -1,7 +1,16 @@
-class Farm < ApplicationRecord
-  belongs_to :user
-  has_many :cameras
+class Farm
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
+  # fields
+  field :name
+  field :address
+
+  # associations
+  embedded_in :user
+  embeds_many :cameras
+
+  # validations
+  validates :name, presence: true
   validates :address, presence: true
-  validates :section_index, presence: true
 end

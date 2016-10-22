@@ -1,6 +1,16 @@
-class Camera < ApplicationRecord
-  belongs_to :farm
+class Camera
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
+  #fields
+  field :ip, type: String
+  field :port, type: String
+  field :access_token, type: String
+
+  # associations
+  embedded_in :farm
+
+  # validations
   validates :ip, presence: true
   validates :port, presence: true
   validates :access_token, presence: true

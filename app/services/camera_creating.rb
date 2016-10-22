@@ -11,19 +11,19 @@ class CameraCreating
     @password = options[:password]
   end
 
-  def save
-    Camera.create(
+  def generate_fields
+    {
       ip: ip,
       port: port,
       access_token: JsonWebToken.encode({
         username: username,
         password: password
       })
-    )
+    }
   end
 
-  def self.create(options)
-    self.new(options).save
+  def self.build(options)
+    new(options).generate_fields
   end
 
   def persisted?
