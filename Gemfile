@@ -25,6 +25,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -41,3 +42,5 @@ gem 'html2slim', '~> 0.2.0'
 gem 'devise-bootstrapped', '~> 0.1.1'
 gem 'font-awesome-sass'
 gem 'owlcarousel-rails'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-attack'

@@ -14,5 +14,16 @@ Bundler.require(*Rails.groups)
 module GreenFarm
   class Application < Rails::Application
     config.eager_load_paths << "#{Rails.root}/lib"
+
+    # rack-cors
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
+    # rack-attack
+    config.middleware.use Rack::Attack
   end
 end
