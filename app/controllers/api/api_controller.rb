@@ -1,4 +1,4 @@
-class Api::V1::ApiController < ApplicationController
+class Api::ApiController < ActionController::Base
   before_action :authenticate
   before_action :set_response
 
