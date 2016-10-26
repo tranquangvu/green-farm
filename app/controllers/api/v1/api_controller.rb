@@ -1,14 +1,22 @@
-class API::V1::ApiController < ApplicationController
+class Api::V1::ApiController < ApplicationController
   before_action :authenticate
+  before_action :set_response
 
   private
 
   def authenticate
-    token = request.headers['Authorization']
+    token        = request.headers['Authorization']
     content_type = request.headers['Content-Type']
 
-    unless token == Rails.application.secrets.bot_connect_token && content_type == 'application/json'
-      render json: { errors: 'Access denied!' }, status: :unauthorized
-    end
+    return render_unauthorized unless token == Rails.application.secrets.server_connect_token
+    render_unauthorized unless request.get? || content_type == 'application/json'
+  end
+
+  def render_unauthorized
+    render json: { errors: 'Access denied!' }, status: :unauthorized
+  end
+
+  def set_response
+    @response = ApiResponse.new()
   end
 end

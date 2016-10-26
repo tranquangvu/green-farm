@@ -25,7 +25,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rails-controller-testing'
-  gem 'dotenv-rails'
 end
 
 group :development do

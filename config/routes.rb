@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     scope module: 'api' do
       namespace :v1 do
         resources :stores, only: [:create]
+        get '/devices', to: 'devices#index'
       end
     end
   end
