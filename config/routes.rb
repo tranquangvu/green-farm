@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   constraints subdomain: 'api' do
     scope module: 'api' do
       namespace :v1 do
-        resources :values, only: [:create]
+        resources :values, only: [:create] do
+          collection do
+            post 'create_list'
+          end
+        end
         
         get '/devices', to: 'devices#index'
       end
