@@ -5,11 +5,8 @@ class Api::ApiController < ActionController::Base
   private
 
   def authenticate
-    token        = request.headers['Authorization']
-    content_type = request.headers['Content-Type']
-
-    return render_unauthorized unless token == Rails.application.secrets.server_connect_token
-    render_unauthorized unless request.get? || content_type == 'application/json'
+    token = request.headers['Authorization']
+    render_unauthorized unless token == Rails.application.secrets.server_connect_token
   end
 
   def render_unauthorized
