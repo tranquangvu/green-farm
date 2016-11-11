@@ -18,5 +18,8 @@
 !/tmp/.keep
 
 # Ignore Byebug command history file.
-.byebug_history
-.env
+/.byebug_history
+/.env
+
+# ignore node modules
+/socket/node_modules

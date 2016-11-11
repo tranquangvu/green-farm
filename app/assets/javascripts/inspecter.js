@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require socket.io
 
 // Camera
 function initCameraStream(target, host, username, password) {

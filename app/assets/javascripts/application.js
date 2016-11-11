@@ -13,12 +13,6 @@ $(window).load(function() {
 })
 
 $(window).ready(function(){
-  // $('li.dropdown').hover(function() {
-  //   $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
-  // }, function() {
-  //   $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
-  // });
-
   $('#owl-sticky').owlCarousel({
     // autoPlay: 3000,
     items: 3,
