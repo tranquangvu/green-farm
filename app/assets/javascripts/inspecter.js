@@ -1,37 +1,35 @@
+//= require socket.io
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require parsley
 //= require nprogress
-
-//**
-//* vendor
-//**
 //= require spin.js/spin.min
 //= require autosize/dist/autosize.min
 //= require moment/min/moment.min
 //= require Flot/jquery.flot
 //= require Flot/jquery.flot.time
 //= require Flot/jquery.flot.resize
-//= require jquery.flot.orderBars
+//= require libs/Flot/jquery.flot.orderBars
 //= require Flot/jquery.flot.pie
-//= require curvedLines
+//= require libs/Flot/curvedLines
 //= require jquery-knob/dist/jquery.knob.min
-//= require jquery.sparkline.min
+//= require libs/jquery.sparkline.min
 //= require nanoscroller/bin/javascripts/jquery.nanoscroller
 //= require d3/d3.min
 //= require rickshaw/rickshaw.min
-//= require core/App
-//= require core/AppNavigation
-//= require core/AppCard
-//= require core/AppNavSearch
-//= require core/AppVendor
+//= require core/source/App
+//= require core/source/AppNavigation
+//= require core/source/AppCard
+//= require core/source/AppNavSearch
+//= require core/source/AppVendor
+//= require core/demo/demo
+//= require datatables.net/js/jquery.dataTables.min
+//= require libs/DataTables/extensions/ColVis/js/dataTables.colVis.min
+//= require libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min
+//= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
-//= require dashboard
-//**
-//* end vendor
-//**
-//= require socket.io
+//= require core/demo/dashboard
 
 // Camera
 function initCameraStream(target, host, username, password) {

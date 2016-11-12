@@ -14,7 +14,7 @@ class Api::V1::ValuesController < Api::ApiController
   def create_list
     begin
       values = Value.create!(value_list_params[:list])
-      
+
       render json: @response.success(values), status: :created
     rescue Exception => e
       render json: @response.failed(error: e), status: :unprocessable_entity

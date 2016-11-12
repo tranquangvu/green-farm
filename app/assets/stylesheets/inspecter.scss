@@ -6,13 +6,8 @@
 @import 'nprogress';
 @import 'nprogress-bootstrap';
 @import 'parsley';
-
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
-/*
- * vendor
- */
 @import 'materialadmin';
 @import 'material-design-iconic-font/scss/material-design-iconic-font';
 @import 'rickshaw/rickshaw';
@@ -20,32 +15,17 @@
 @import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3';
 @import 'select2/dist/css/select2.min';
 @import 'wizard';
-
-/*
- * End vendor
- */
-
 @import 'inspecter/base/dashboard';
 @import 'inspecter/farms/index';
 @import 'inspecter/cameras/index';
 @import 'inspecter/sensors/index';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
 
- //===============================================
-// Common
-//===============================================
 body{
   background: #fff;
 }
 
-#header {
-  position: fixed;
-}
-
-#menubar{
-  top: 64px !important;
-}
-
-.noty{
+.notice {
   width: 300px;
   position: fixed;
   right: 15px;
@@ -55,60 +35,4 @@ body{
   border: none;
   padding: 20px 30px 20px 15px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 10px 0 rgba(0,0,0,0.22);
-}
-
-//===============================================
-// Google campiagns
-//===============================================
-.datepicker{
-  border-radius: 0 !important;
-}
-
-#custom_start_date_group, #custom_end_date_group{
-  width: 40%;
-  display: inline-block;
-}
-
-#campaigns_filter_submit{
-  width: 15%;
-  display: inline-block;
-}
-
-.parsley-errors-list{
-  position: absolute;
-  bottom: -20px;
-}
-
-#keywords_create_form, #ads_create_form, #ad_group_create_form{
-  display: none;
-}
-
-#ad-preview{
-  padding: 10px 20px;
-  margin-left: 30px;
-  background: #f5f5f5;
-}
-
-//===============================================
-// Google Account
-//===============================================
-.card {
-  margin-top: 15px;
-}
-
-.group {
-  width: 100%;
-}
-
-.group .error {
-  display: none;
-}
-
-.group .error-show {
-  font-size: 14px;
-  color: #f22314;
-}
-
-.button {
-  margin-top: 20px;
 }

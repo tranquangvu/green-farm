@@ -5,14 +5,15 @@
 @import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-/*@import 'https://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans|Raleway:400,600,700|Shadows+Into+Light&subset=vietnamese';*/
 @import 'owl.carousel';
 @import 'owl.theme';
 @import 'bootstrap-datetimepicker';
 @import 'bootstrap-select';
-
 @import 'landing/home';
-@import 'fonts';
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
 $green: #6AB42F;
 $green-icon: #5AA320;

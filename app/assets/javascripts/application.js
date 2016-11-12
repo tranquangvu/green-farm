@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require owl.carousel
-//= require parallax
+//= require libs/parallax
 //= require moment
 //= require bootstrap-datetimepicker
 //= require bootstrap-select

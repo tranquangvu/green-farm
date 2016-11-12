@@ -14,6 +14,6 @@ class Api::ApiController < ActionController::Base
   end
 
   def set_response
-    @response = ApiResponse.new()
+    @response = ApiResponse.new
   end
 end

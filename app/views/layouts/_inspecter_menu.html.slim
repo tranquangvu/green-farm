@@ -8,45 +8,44 @@
         span.text-lg.text-bold.text-primary MATERIAL&nbsp;ADMIN
   .nano.has-scrollbar style=("height: 100%;") 
     .nano-content style=("right: -15px;") tabindex="0" 
-      .menubar-scroll-panel style=("padding-bottom: 55px;") 
-        .menubar-head-panel
-        ul#main-menu.gui-controls
+      .menubar-scroll-panel style=("padding-bottom: 55px;")
+        ul#main-menu.gui-controls.gui-controls-tree
           li.active.expanded
             = link_to inspecter_dashboard_path, class: 'active' do
               .gui-icon
                 i.fa.fa-home
               span.title Dashboard
-          li.gui-folder
+          li
             = link_to inspecter_farms_path do
               .gui-icon
                 i.fa.fa-puzzle-piece.fa-fw
               span.title Farm
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-puzzle-piece.fa-fw
               span.title Giám sát
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-book.fa-fw
               span.title Báo cáo
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-bar-chart.fa-fw
               span.title Vẽ biểu đồ
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-exclamation-triangle.fa-fw
               span.title Cảnh báo
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-picture-o.fa-fw
               span.title Thư viện ảnh
-          li.gui-folder
+          li
             = link_to "#" do
               .gui-icon
                 i.fa.fa-camera-retro.fa-fw
