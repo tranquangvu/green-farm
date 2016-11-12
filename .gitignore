@@ -18,6 +18,11 @@
 !/tmp/.keep
 
 # Ignore Byebug command history file.
+.byebug_history
+.env
+
+# Ignore bower
+vendor/assets/components
 /.byebug_history
 /.env
 

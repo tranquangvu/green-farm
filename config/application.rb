@@ -25,5 +25,8 @@ module GreenFarm
 
     # rack-attack
     config.middleware.use Rack::Attack
+
+    #assets path bower
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end
