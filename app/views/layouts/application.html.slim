@@ -11,4 +11,6 @@ html
     - if params[:controller] == 'landing'
       = render 'shared/loader'
     = render 'shared/flash_message'
+    = render 'layouts/application_header'
     = yield
+    = render 'layouts/application_footer'

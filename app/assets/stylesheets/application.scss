@@ -14,6 +14,11 @@
 @import 'landing/home';
 @import 'fonts';
 
+$green: #6AB42F;
+$green-icon: #5AA320;
+$grey: #767676;
+$black-1: #222;
+
 .alert-error {
   @extend .alert-danger;
 }
@@ -111,3 +116,358 @@ a:hover, a:focus{
   background-color: #5aa320;
 }
 
+/* Header */
+.topbar{
+  background-color: $green;
+  color: white;
+  padding: 7.5px 0;
+
+  .social{
+    padding: 0 5px;
+    height: 100%;
+    display: inline-block;
+    font-size: 0.8em;
+
+    span{
+      color: $green-icon;
+
+      i.fa-stack-1x{
+        font-size: 13px;
+      }
+    }
+  }
+
+  .contact{
+    display: inline-block;
+    float: right;
+    height: 100%;
+
+    i{
+      padding: 7.5px;
+      font-size: 15px;
+    }
+
+    i:before{
+      padding: 0 5px;
+    }
+  }
+}
+
+.header{
+  background-color: white;
+
+  .navbar-default{
+    margin: 0;
+    background-color: transparent;
+    background: none;
+    border: 0;
+    display: flex;
+
+    .navbar-table {
+      display: inline-block;
+      width: 100%;
+    }
+
+    .navbar-header{
+      display: inline-flex;
+      padding: 20px 0;
+    }
+
+    .navbar-brand{
+      float: none;
+      padding: 0;
+    }
+
+    ul.nav{
+
+      .dropdown{
+        position: static;
+      }
+
+      .megamenu-content {
+        padding: 15px;
+      }
+
+      .dropdown.megamenu-fw .dropdown-menu {
+        left: 0;
+        right: 0;
+      }
+
+      ul{
+        padding: 0;
+      }
+
+      li{
+        list-style: none;
+      }
+
+      & > li{
+        margin-right: 5px;
+        padding: 30px 0;
+      }
+
+      & > li:last-child{
+        margin-right: 0;
+      }
+
+      & > li > a{
+        padding: 8px 15px;
+        color: #222;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      & > li:hover, & > li:focus{
+        & > a{
+          color: white;
+          background-color: $green;
+          transition: all 400ms ease;
+          -moz-transition: all 400ms ease;
+          -webkit-transition: all 400ms ease;
+          -o-transition: all 400ms ease;
+          -ms-transition: all 400ms ease;
+        }
+      }
+
+      & > li > a > span{
+        margin-left: 5px;
+      }
+
+      .dropdown-menu .sub-menu{
+        left: 100%;
+        position: absolute;
+        top: 0;
+        visibility: hidden;
+        margin-top: -1px;
+        border-radius: 0;
+      }
+
+      .dropdown-menu li:hover{
+        a{
+          background-color: $green-icon;
+        }
+
+        .sub-menu{
+          visibility: visible;
+          background-color: $green-icon;
+          margin-top: 0;
+        }
+      }
+
+      .dropdown-menu{
+        display: none;
+        left: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background-color: $green;
+        min-width: 200px;
+
+        & > li{
+          a{
+            padding: 10px 20px;
+            color: white;
+
+            &:hover, &:focus{
+              background-color: $green-icon;
+            }
+          }
+        }
+
+        span{
+          float: right;
+        }
+      }
+
+      li.dropdown:hover .dropdown-menu {
+        display: block;
+      }
+
+      .megamenu-content{
+        border-top: 3px solid $green;
+        padding: 30px 3em;
+        background: url(menubg.jpg) no-repeat right bottom #fff;
+        background-color: white;
+
+        & > li{
+          p{
+            font-weight: 600;
+            padding-bottom: 5px;
+          }
+
+          &:hover{
+            a{
+              background-color: white;
+            }
+          }
+
+          a{
+            color: $grey;
+
+            &:hover, &:focus{
+              color: $green;
+              background-color: transparent;
+            }
+          }
+        }
+
+        .form-control {
+          font-size: 12px;
+          height: 35px;
+          margin-bottom: 15px;
+          border-radius: 0;
+
+          &:focus{
+            border-color: $green-icon;
+            box-shadow: none;
+          }
+        }
+
+        .btn{
+          font-weight: 600;
+          text-transform: none;
+          font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          border-radius: 0;
+        }
+
+        .btn-primary{
+          color: white;
+          background-color: $green-icon;
+          border-color: $green-icon;
+        }
+      }
+    }
+  }
+}
+
+/* Footer */
+footer.footer{
+  padding: 80px 0;
+  position: relative;
+  background-color: $black-1;
+  display: block;
+
+  .row{
+    margin: 0 40px;
+  }
+
+  .widget-title{
+    margin-bottom: 10px;
+
+    h4{
+      color: white;
+      font-weight: 700;
+      font-size: 21px;
+      font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 0 0 10px 0;
+    }
+  }
+
+  ul{
+    list-style: none;
+    color: $grey;
+    font-weight: 500;
+    padding: 0;
+  }
+
+  li{
+    list-style: none;
+    margin-bottom: 14px;
+    display: table;
+
+    p{
+      line-height: 1.8;
+      margin: 0 0 5px;
+    }
+
+    a{
+      color: $grey;
+      font-weight: 500;
+      display: block;
+
+      &:hover, &:focus{
+        outline-color:transparent;
+        color: $green-icon;
+      }
+    }
+
+    img{
+      max-width: 80px;
+    }
+
+    .alignleft{
+      float: left;
+      margin: 6px 20px 6px 0;
+      display: inline;
+      border: 0px;
+      background: none;
+      padding: 0;
+      display: block;
+    }
+  }
+
+  .twitter-widget{
+    p:before {
+      content: "\f099";
+      font-family: "FontAwesome";
+      font-size: 16px;
+      left: 0;
+      color: $green-icon;
+      padding-right: 5px;
+      position: relative;
+      top: 2px;
+    }
+
+    a{
+      display: inline-flex;
+      margin: 0 5px;
+      color: $green-icon;
+
+      &:hover, &:focus{
+        color: $green-icon;
+      }
+    }
+
+    span{
+      font-size: 12px;
+      font-style: italic;
+    }
+  }
+
+  .contact-widget{
+    i{
+      padding-right: 5px;
+    }
+  }
+}
+
+section.copyright{
+  border-top: 1px solid #333;
+  background-color: $black-1;
+  padding: 30px 0;
+  display: block;
+  position: relative;
+  text-transform: capitalize;
+
+  ul{
+    list-style: none;
+    text-align: right;
+
+    li{
+      display: inline-flex;
+      padding: 0 5px;
+
+      a{
+        color: $grey;
+
+        &:focus, &:hover{
+          color: $green-icon;
+        }
+      }
+    }
+  }
+
+  p{
+    color: $grey;
+  }
+}

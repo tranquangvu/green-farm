@@ -7,7 +7,7 @@
 //= require bootstrap-datetimepicker
 //= require bootstrap-select
 
-$(window).load(function() {
+$(window).on('load', function() {
   $('#loader').delay(1400).fadeOut('slow');
   $('body').delay(300).css({'overflow':'visible'});
 })
