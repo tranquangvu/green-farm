@@ -6,7 +6,8 @@ class Inspecter::FarmsController < Inspecter::BaseController
   end
 
   def show
-    @cameras = farm.cameras
+    @camera = farm.camera
+    @device = farm.device
   end
 
   private

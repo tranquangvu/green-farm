@@ -23,3 +23,8 @@
 
 # Ignore bower
 vendor/assets/components
+/.byebug_history
+/.env
+
+# ignore node modules
+/socket/node_modules

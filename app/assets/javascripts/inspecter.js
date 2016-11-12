@@ -31,6 +31,7 @@
 //**
 //* end vendor
 //**
+//= require socket.io
 
 // Camera
 function initCameraStream(target, host, username, password) {
