@@ -7,7 +7,7 @@ class Api::V1::ValuesController < Api::ApiController
     if value.save
       render json: @response.success(value), status: :created
     else
-      render json: @response.failed(value.errors.messages), status: :unprocessable_entity
+      render json: @response.failure(value.errors.messages), status: :unprocessable_entity
     end
   end
 
@@ -17,7 +17,7 @@ class Api::V1::ValuesController < Api::ApiController
 
       render json: @response.success(values), status: :created
     rescue Exception => e
-      render json: @response.failed(error: e), status: :unprocessable_entity
+      render json: @response.failure(error: e), status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class Api::V1::ValuesController < Api::ApiController
 
   def check_device
     unless Device.find(value_params[:device_id])
-      render json: @response.failed(error: 'Device not found'), status: :not_found
+      render json: @response.failure(error: 'Device not found'), status: :not_found
     end
   end
 end

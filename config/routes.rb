@@ -2,17 +2,18 @@ Rails.application.routes.draw do
   devise_for :users
   root 'landing#home'
 
-  constraints subdomain: 'api' do
-    scope module: 'api' do
-      namespace :v1 do
-        resources :values, only: [:create] do
-          collection do
-            post 'create_list'
-          end
+  namespace :api do
+    namespace :v1 do
+      post '/users/sign_in', to: 'sessions#create'
+      delete '/users/sign_out', to: 'sessions#destroy'
+
+      resources :values, only: [:create] do
+        collection do
+          post 'create_list'
         end
-        
-        get '/devices', to: 'devices#index'
       end
+
+      get '/devices', to: 'devices#index'
     end
   end
 

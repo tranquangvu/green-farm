@@ -9,6 +9,7 @@ class User
   field :username,           type: String, default: ""
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :uid,                type: String, default: ""
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -38,6 +39,16 @@ class User
   # asssocations
   has_many :farms
 
+  # triggers
+  before_create :set_authenticatable
+
   # validations
   validates :username, presence: true, length: { minimum: 3, maximum: 15 }
+
+  private
+
+  def set_authenticatable
+    self.uid = SecureRandom.uuid
+    UidSecret.create(uid: self.uid, secret: SecureRandom.hex(64))
+  end
 end

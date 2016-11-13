@@ -1,18 +1,22 @@
 class ApiResponse
-  attr_accessor :status, :data
-  STATUSES = [:success, :failed]
-  def initialize(status: nil, data: {})
-    @status, @data = status, data
+  attr_accessor :success, :data
+
+  def initialize(success: nil, data: {})
+    @success, @data = success, data
   end
+
   def set(options = {})
     options.each do |key, value|
       send("#{key}=", value)
     end
     self
   end
-  STATUSES.each do |status|
-    define_method(status) do |data = {}|
-      set(status: status, data: data)
-    end
+
+  def success(data={})
+    set(success: true, data: data)
+  end
+
+  def failure(data={})
+    set(success: false, data: data)
   end
 end

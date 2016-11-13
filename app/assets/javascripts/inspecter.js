@@ -3,7 +3,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require parsley
-//= require nprogress
 //= require spin.js/spin.min
 //= require autosize/dist/autosize.min
 //= require moment/min/moment.min
@@ -31,34 +30,13 @@
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require core/demo/dashboard
 
-// Camera
+$(function(){
+  window.setTimeout(function() { $(".noty").alert('close'); }, 8000);
+});
+
 function initCameraStream(target, host, username, password) {
   setTimeout(function() {
     var date = new Date();
-    target.src = host + '/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=' + username + '&pwd=' + password + '&t=' + Math.floor(date.getTime()/1000);  
+    target.src = host + '/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=' + username + '&pwd=' + password + '&t=' + Math.floor(date.getTime()/1000);
   }, 1000);
 }
-
-// =================================
-// COMMON JS
-// =================================
-
-// init progress bar
-NProgress.configure({
-  showSpinner: false,
-  ease: 'ease',
-  speed: 500
-});
-
-window.onbeforeunload = function(e) {
-  NProgress.start();  
-};
-
-$(function(){
-  // set timeout for alert close
-  window.setTimeout(function() { $(".noty").alert('close'); }, 8000);
-
-  // done progress bar when page loaded
-  NProgress.set(0.2);
-  NProgress.done();
-});
