@@ -1,0 +1,14 @@
+.contacts-form-container.appoform-wrapper
+  = simple_form_for contact, defaults: { label: false }, html: { class: 'row-fluid appoform' } do |f|
+    .col-md-12
+      = f.input :email, placeholder: 'Email address', input_html: { class: 'form-control', required: true}
+    .col-md-12
+      = f.input :phone_number, placeholder: 'Phone number', input_html: { class: 'form-control', required: true }
+    .col-md-6
+      = f.input :first_name, placeholder: 'First Name', input_html: { class: 'form-control', required: true }
+    .col-md-6
+      = f.input :last_name, placeholder: 'Last Name', input_html: { class: 'form-control', required: true }
+    .col-md-12
+      = f.input :message, placeholder: 'Message', input_html: { class: 'form-control' }, as: :text
+    .col-md-12
+      = f.submit 'Send Now', class: 'btn btn-primary btn-block btn-lg'

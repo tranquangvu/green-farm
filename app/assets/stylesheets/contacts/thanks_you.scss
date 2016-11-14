@@ -1,0 +1,31 @@
+#contact-thanks_you-container {
+  text-align: center;
+
+  .header-image {
+    max-width: 300px;
+    display: block;
+    margin: 0 auto 10px auto;
+  }
+
+  .thank-container {
+    h1 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 22px;
+    }
+  }
+
+  .btn-back {
+    background: #5AA320;
+    padding: 15px 50px;
+    margin: 30px auto 45px auto;
+    border-radius: 0;
+    color: #fff !important;
+    font-family: 'Raleway', sans-serif;
+  }
+}

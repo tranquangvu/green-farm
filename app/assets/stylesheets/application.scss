@@ -1,19 +1,22 @@
 /*
  *= require_self
  */
-@import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'bootstrap-sprockets';
+@import 'bootstrap-datetimepicker';
+@import 'bootstrap-select';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 @import 'owl.carousel';
 @import 'owl.theme';
-@import 'bootstrap-datetimepicker';
-@import 'bootstrap-select';
-@import 'landing/home';
+
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i);
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+@import 'landing/home';
+@import 'contacts/thanks_you';
 
 $green: #6AB42F;
 $green-icon: #5AA320;
@@ -29,7 +32,7 @@ $black-1: #222;
 }
 
 .alert-notice {
-  @extend .alert-info; 
+  @extend .alert-info;
 }
 
 a{

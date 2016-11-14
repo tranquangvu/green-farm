@@ -1,0 +1,30 @@
+section.appointment#sign-up
+  .container
+    .general-title
+      h4 Appointment Form
+      p.lead Let's appointment now with our custom form
+      hr
+    .row
+      .col-lg-8.col-md-8
+        = render 'contacts/form', contact: contact
+      .col-lg-4.col-md-4
+        .workinghours
+          ul
+            li
+              | Weekdays
+              span 9:00am - 7:00pm
+            li
+              | Weekend
+              span 9:00am - 7:00pm
+            li
+              | Phone
+              span +90 534 970 00 00
+            li
+              | Fax
+              span +90 534 970 00 01
+            li
+              | E-Mail
+              span support@yoursite.com
+            li
+              | Website
+              span yoursite.com

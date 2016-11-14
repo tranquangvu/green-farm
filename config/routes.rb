@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root 'landing#home'
+
+  resources :contacts, only: [:create] do
+    collection do
+      get 'thanks_you'
+    end
+  end
 
   namespace :api do
     namespace :v1 do
