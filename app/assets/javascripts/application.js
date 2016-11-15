@@ -12,7 +12,7 @@ $(window).on('load', function() {
   $('body').css({'overflow':'visible'});
 });
 
-$(window).ready(function(){
+$(function(){
   $('#owl-sticky').owlCarousel({
     items: 3,
     itemsDesktop: [1199,3],
@@ -31,6 +31,8 @@ $(window).ready(function(){
     imageSrc: '/assets/parallax_01.jpg',
     speed: 0.5
   });
+
+  window.setTimeout(function() { $(".notice").alert('close'); }, 8000);
 });
 
 $(document).on('click', 'a[href^="#"]', function(e) {

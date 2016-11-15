@@ -14,7 +14,7 @@ html
         section
           .section-body
             - flash.each do |name, msg|
-              = content_tag :div, class: [:alert, :noty, alert_class_by_name(name)] do
+              = content_tag :div, class: [:alert, :notice, alert_class_by_name(name)] do
                 a.close aria-label="close" data-dismiss="alert" &times;
                 = msg
             = yield

@@ -31,7 +31,7 @@
 //= require core/demo/dashboard
 
 $(function(){
-  window.setTimeout(function() { $(".noty").alert('close'); }, 8000);
+  window.setTimeout(function() { $(".notice").alert('close'); }, 8000);
 });
 
 function initCameraStream(target, host, username, password) {
