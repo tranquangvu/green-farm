@@ -1,7 +1,9 @@
 class Inspecter::BaseController < ApplicationController
   layout 'inspecter'
-  before_filter :authenticate_user!
-  
+
+  before_action :authenticate_user!
+
   def dashboard
+    @farms = Farm.all
   end
 end

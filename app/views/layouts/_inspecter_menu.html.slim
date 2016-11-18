@@ -1,25 +1,19 @@
 #menubar.menubar-inverse
   .menubar-fixed-panel
-    div
-      a.btn.btn-icon-toggle.btn-default.menubar-toggle data-toggle="menubar" 
-        i.fa.fa-bars
+    a.btn.btn-icon-toggle.btn-default.menubar-toggle data-toggle="menubar"
+      i.fa.fa-bars
     .expanded
       = link_to inspecter_dashboard_path do
         span.text-lg.text-bold.text-primary MATERIAL&nbsp;ADMIN
-  .nano.has-scrollbar style=("height: 100%;") 
-    .nano-content style=("right: -15px;") tabindex="0" 
-      .menubar-scroll-panel style=("padding-bottom: 55px;")
+  .nano.has-scrollbar
+    .nano-content
+      .menubar-scroll-panel
         ul#main-menu.gui-controls.gui-controls-tree
           li.active.expanded
             = link_to inspecter_dashboard_path, class: 'active' do
               .gui-icon
                 i.fa.fa-home
               span.title Dashboard
-          li
-            = link_to inspecter_farms_path do
-              .gui-icon
-                i.fa.fa-puzzle-piece.fa-fw
-              span.title Farm
           li
             = link_to "#" do
               .gui-icon
@@ -28,17 +22,17 @@
           li
             = link_to "#" do
               .gui-icon
-                i.fa.fa-book.fa-fw
+                i.fa.fa-print.fa-fw
               span.title Báo cáo
           li
             = link_to "#" do
               .gui-icon
-                i.fa.fa-bar-chart.fa-fw
+                i.fa.fa-area-chart.fa-fw
               span.title Vẽ biểu đồ
           li
             = link_to "#" do
               .gui-icon
-                i.fa.fa-exclamation-triangle.fa-fw
+                i.fa.fa-bell.fa-fw
               span.title Cảnh báo
           li
             = link_to "#" do
@@ -50,9 +44,3 @@
               .gui-icon
                 i.fa.fa-camera-retro.fa-fw
               span.title Camera trực tuyến
-        .menubar-foot-panel
-          small.no-linebreak.hidden-folded
-            span.opacity-75 Copyright &copy; 2016
-            strong CodeCovers
-    .nano-pane style=("display: block;") 
-      .nano-slider style=("height: 113px; transform: translate(0px);")
