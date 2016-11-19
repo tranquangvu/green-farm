@@ -3,19 +3,19 @@
     a.btn.btn-icon-toggle.btn-default.menubar-toggle data-toggle="menubar"
       i.fa.fa-bars
     .expanded
-      = link_to inspecter_dashboard_path do
+      = link_to inspecter_dashboard_path(@farm) do
         span.text-lg.text-bold.text-primary MATERIAL&nbsp;ADMIN
   .nano.has-scrollbar
     .nano-content
       .menubar-scroll-panel
         ul#main-menu.gui-controls.gui-controls-tree
           li.active.expanded
-            = link_to inspecter_dashboard_path, class: 'active' do
+            = link_to inspecter_dashboard_path(@farm), class: 'active' do
               .gui-icon
                 i.fa.fa-home
               span.title Dashboard
           li
-            = link_to "#" do
+            = link_to inspecter_farm_path(@farm) do
               .gui-icon
                 i.fa.fa-puzzle-piece.fa-fw
               span.title Giám sát

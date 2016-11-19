@@ -1,11 +1,62 @@
 #inspecter-farms-show-container
-  .cameras-container
-    h1 Cameras
-    = link_to "Camera #{@camera.id}", inspecter_farm_camera_url(@camera.farm.id, @camera.id)
-  .sensors-container
-    h1 Sensors
-    p id="device-#{@device.id}"
-      | 1
+  .row#current-value
+    .col-md-3.attribute
+      .card
+        .card-head
+          | Temperature
+          span.sub-head
+          | (*C)
+        .card-body
+          #temp-chart.circle-chart data-size="200" data-thickness="18"
+            .chart-center
+              span.chart-value 32
+              .chart-label Good
+        ul.card-footer
+          li Accepted Min: #{20}
+          li Accepted Max: #{45}
+
+    .col-md-3.attribute
+      .card
+        .card-head
+          | Humidity
+          span.sub-head
+            | (%)
+        .card-body
+          #humid-chart.circle-chart data-size="200" data-thickness="18"
+            .chart-center
+              span.chart-value 32
+              .chart-label Good
+        ul.card-footer
+          li Accepted Min: #{20}
+          li Accepted Max: #{45}
+    .col-md-3.attribute
+      .card
+        .card-head
+          | Bright
+          span.sub-head
+            | (Lx)
+        .card-body
+          #bright-chart.circle-chart data-size="200" data-thickness="18"
+            .chart-center
+              span.chart-value 32
+              .chart-label Good
+        ul.card-footer
+          li Accepted Min: #{20}
+          li Accepted Max: #{45}
+    .col-md-3.attribute
+      .card
+        .card-head
+          | Soil moisture
+          span.sub-head
+          | (%)
+        .card-body
+          #soil-moisture-chart.circle-chart data-size="200" data-thickness="18"
+            .chart-center
+              span.chart-value 32
+              .chart-label Good
+        ul.card-footer
+          li Accepted Min: #{20}
+          li Accepted Max: #{45}
 
 javascript:
   var socket = io('http://0.0.0.0:5001');
@@ -32,4 +83,37 @@ javascript:
 
   socket.on('disconnect', function(){
     console.log('Client disconnected');
+  });
+
+  // add circle chart
+  $('#temp-chart').circleProgress({
+    startAngle: 1.5 * Math.PI,
+    lineCap: 'round',
+    value: .75,
+    emptyFill: '#f5f5f5',
+    fill: { 'color': '#4caf50' }
+  });
+
+  $('#humid-chart').circleProgress({
+    startAngle: 1.5 * Math.PI,
+    lineCap: 'round',
+    value: .75,
+    emptyFill: '#f5f5f5',
+    fill: { 'color': '#4caf50' }
+  });
+
+  $('#bright-chart').circleProgress({
+    startAngle: 1.5 * Math.PI,
+    lineCap: 'round',
+    value: .75,
+    emptyFill: '#f5f5f5',
+    fill: { 'color': '#4caf50' }
+  });
+
+  $('#soil-moisture-chart').circleProgress({
+    startAngle: 1.5 * Math.PI,
+    lineCap: 'round',
+    value: .75,
+    emptyFill: '#f5f5f5',
+    fill: { 'color': '#4caf50' }
   });

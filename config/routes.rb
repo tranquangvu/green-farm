@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :inspecter do
-    root 'base#dashboard', as: :dashboard
+    get '/:farm_id', to: 'base#dashboard', as: :dashboard
 
     resources :farms, only: [:index, :show] do
       resources :cameras, only: [:index, :show]

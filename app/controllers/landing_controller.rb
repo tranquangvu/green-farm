@@ -1,6 +1,10 @@
 class LandingController < ApplicationController
   def home
-    redirect_to inspecter_dashboard_path if user_signed_in?
-    @contact = Contact.new
+    if user_signed_in?
+      @farm = Farm.first
+      redirect_to inspecter_dashboard_path(@farm)
+    else
+      @contact = Contact.new
+    end
   end
 end

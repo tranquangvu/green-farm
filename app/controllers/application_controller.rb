@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource_or_scope)
-    inspecter_dashboard_path(farm_id: Farm.first.id)
+    @farm = Farm.first
+    inspecter_dashboard_path(@farm)
   end
 
   protected
