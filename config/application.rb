@@ -28,5 +28,8 @@ module GreenFarm
 
     #assets path bower
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
+    # timezone config
+    config.time_zone = "Hanoi"
   end
 end

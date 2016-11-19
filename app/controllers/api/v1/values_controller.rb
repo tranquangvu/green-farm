@@ -14,7 +14,6 @@ class Api::V1::ValuesController < Api::ApiController
   def create_list
     begin
       values = Value.create!(value_list_params[:list])
-
       render json: @response.success(values), status: :created
     rescue Exception => e
       render json: @response.failure(error: e), status: :unprocessable_entity
@@ -24,11 +23,11 @@ class Api::V1::ValuesController < Api::ApiController
   private
 
   def value_params
-    params.require(:value).permit(:temp, :air_humid, :soil_humid, :brightness, :device_id)
+    params.require(:value).permit(:temperature, :humidity, :soil_moisture, :light, :device_id)
   end
 
   def value_list_params
-    params.require(:value).permit(:list => [:temp, :air_humid, :soil_humid, :brightness, :device_id])
+    params.require(:value).permit(:list => [:temperature, :humidity, :soil_moisture, :light, :device_id])
   end
 
   def check_device

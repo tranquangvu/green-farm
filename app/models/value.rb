@@ -3,17 +3,17 @@ class Value
   include Mongoid::Timestamps
 
   # fields
-  field :temp, type: Float
-  field :air_humid, type: Float
-  field :soil_humid, type: Float
-  field :brightness, type: Float
+  field :temperature, type: Float
+  field :humidity, type: Float
+  field :soil_moisture, type: Float
+  field :light, type: Float
 
   # assocations
   belongs_to :device
 
   # validations
-  validates :temp, presence: true
-  validates :air_humid, presence: true
-  validates :soil_humid, presence: true
-  validates :brightness, presence: true
+  validates :temperature, presence: true
+  validates :humidity, presence: true
+  validates :soil_moisture, presence: true
+  validates :light, presence: true
 end

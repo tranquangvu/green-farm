@@ -64,21 +64,21 @@ javascript:
   socket.on('connect', function(){
     console.log('Client connected');
 
-    socket.emit('response_connect', {
-      web_client: true,
+    socket.emit('client_response_connect', {
+      client: true,
       device_id: "#{@farm.device.id}"
     });
   });
 
-  socket.on('render_value_view', function(data){
+  socket.on('client_update_view', function(data){
     var device_id = '#device-' + data.device_id;
     var text = '';
-    text += 'Nhiet do: ' + data.temp;
-    text += ' - Do am: ' + data.air_humid;
-    text += ' - Anh sang: ' + data.brightness;
-    text += ' - Do am dat: ' + data.soil_humid;
+    text += 'Nhiet do: ' + data.temperature;
+    text += ' - Do am: ' + data.humidity;
+    text += ' - Anh sang: ' + data.light;
+    text += ' - Do am dat: ' + data.soil_moisture;
 
-    $(device_id).text(text);
+    console.log(text);
   });
 
   socket.on('disconnect', function(){
@@ -91,7 +91,8 @@ javascript:
     lineCap: 'round',
     value: .75,
     emptyFill: '#f5f5f5',
-    fill: { 'color': '#4caf50' }
+    fill: { 'color': '#4caf50' },
+    animation: false
   });
 
   $('#humid-chart').circleProgress({

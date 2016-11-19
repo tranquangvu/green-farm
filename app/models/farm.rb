@@ -5,14 +5,14 @@ class Farm
   # fields
   field :name, type: String
   field :address, type: String
-  field :max_limit_temp, type: Float
-  field :min_limit_temp, type: Float
-  field :max_limit_air_humid, type: Float
-  field :min_limit_air_humid, type: Float
-  field :max_limit_soil_humid, type: Float
-  field :min_limit_soil_humid, type: Float
-  field :max_limit_brightness, type: Float
-  field :min_limit_brightness, type: Float
+  field :max_limit_temperature, type: Float
+  field :min_limit_temperature, type: Float
+  field :max_limit_humidity, type: Float
+  field :min_limit_humidity, type: Float
+  field :max_limit_soil_moisture, type: Float
+  field :min_limit_soil_moisture, type: Float
+  field :max_limit_light, type: Float
+  field :min_limit_light, type: Float
 
   # associations
   belongs_to :user
