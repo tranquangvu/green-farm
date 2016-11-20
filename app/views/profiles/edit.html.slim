@@ -1,2 +1,28 @@
 #profiles-edit-container
-  h1 this is profile edit
+  .pmodal
+    .pmodal-top
+      h1.pmodal-title Edit Profile
+    .pmodal-middle
+      = form_for @user, url: profile_path(@user), html: { method: :patch } do |f|
+        .form-group
+          = f.email_field :email, placeholder: 'Email'
+          - @user.errors[:email].any?
+            .form-error Email #{@user.errors[:email].first}
+        .form-group
+          = f.text_field :username, placeholder: 'Username'
+          - @user.errors[:username].any?
+            .form-error Username #{@user.errors[:username].first}
+        .form-group
+          = f.password_field :password, autocomplete: "off", placeholder: 'Password'
+          - @user.errors[:password].any?
+            .form-error Password #{@user.errors[:password].first}
+        .form-group
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password Confirm'
+          - @user.errors[:password_confirmation].any?
+            .form-error Password confirmation #{@user.errors[:password_confirmation].first}
+        .form-group
+          = f.password_field :current_password, autocomplete: "off", placeholder: 'Current Password'
+          - @user.errors[:current_password].any?
+            .form-error Current password #{@user.errors[:current_password].first}
+        .form-actions
+          = f.submit 'Submit', class: 'btn submit'

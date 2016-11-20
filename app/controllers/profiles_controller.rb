@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
 
   before_action :authenticate_user!, except: [:show]
   before_action :set_user
+  before_action :owned_profile, only: [:edit, :update]
 
   def show
   end
@@ -11,12 +12,26 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    if @user.update_with_password(profile_params)
+      bypass_sign_in(@user)
+      redirect_to profile_path(@user)
+    else
+      render :edit
+    end
   end
 
   private
 
   def set_user
     @user ||= User.find(params[:id])
+    redirect_to root_path unless @user
+  end
+
+  def owned_profile
+    unless current_user == @user
+      flash[:alert] = "This profile isn't belongs to you"
+      redirect_to profile(@user)
+    end
   end
 
   def profile_params
