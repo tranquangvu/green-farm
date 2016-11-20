@@ -19,7 +19,11 @@ Rails.application.routes.draw do
       post    '/values/create_list',  to: 'values#create_list'
       get     '/devices',             to: 'devices#index'
 
-      resources :farms, only: [:index, :show]
+      resources :farms, only: [:index, :show] do
+        member do
+          get 'sensor_data'
+        end
+      end
     end
   end
 

@@ -19,6 +19,8 @@ class Farm
   has_one :camera
   has_one :device
 
+  delegate :values, to: :device
+
   # validations
   validates :name, presence: true
   validates :address, presence: true

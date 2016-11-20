@@ -16,4 +16,8 @@ class Value
   validates :humidity, presence: true
   validates :soil_moisture, presence: true
   validates :light, presence: true
+
+  def time
+    created_at
+  end
 end
