@@ -13,16 +13,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post '/users/sign_in', to: 'sessions#create'
-      delete '/users/sign_out', to: 'sessions#destroy'
+      post    '/users/sign_in',       to: 'sessions#create'
+      delete  '/users/sign_out',      to: 'sessions#destroy'
+      post    '/values',              to: 'values#create'
+      post    '/values/create_list',  to: 'values#create_list'
+      get     '/devices',             to: 'devices#index'
 
-      resources :values, only: [:create] do
-        collection do
-          post 'create_list'
-        end
-      end
-
-      get '/devices', to: 'devices#index'
+      resources :farms, only: [:index, :show]
     end
   end
 
