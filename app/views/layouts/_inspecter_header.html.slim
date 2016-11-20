@@ -40,8 +40,8 @@ header#header
                 = current_user.email
           ul.dropdown-menu.animation-dock
             li.dropdown-header Config
-            li= link_to "Profile", "#"
-            li= link_to "Edit Profile", "#"
+            li= link_to "Profile", profile_path(current_user)
+            li= link_to "Edit Profile", edit_profile_path(current_user)
             li.divider
             li= link_to destroy_user_session_path, method: :delete
               i.fa.fa-fw.fa-power-off.text-danger

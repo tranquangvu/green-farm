@@ -13,10 +13,7 @@ html
       #content
         section
           .section-body
-            - flash.each do |name, msg|
-              = content_tag :div, class: [:alert, :notice, alert_class_by_name(name)] do
-                a.close aria-label="close" data-dismiss="alert" &times;
-                = msg
+            = render 'shared/flash_message'
             = yield
       #menubar.menubar-inverse.animate
         = render 'layouts/inspecter_menu'

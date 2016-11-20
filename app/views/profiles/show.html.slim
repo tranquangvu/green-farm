@@ -1,0 +1,16 @@
+#profiles-show-container
+  .pmodal
+    .pmodal-top
+      h1.pmodal-title Your Profile
+    .pmodal-middle
+      .pmodal-avatar
+        img alt="" src="http://i66.tinypic.com/33arjut.png"
+    .pmodal-bottom
+      .pmodal-profile-detail
+        p.pmodal-profile-username= current_user.username
+        p.pmodal-profile-email= current_user.email
+      .pmodal-actions
+        = link_to inspecter_dashboard_path(Farm.first), class: 'btn-circle'
+          = icon 'arrow-left'
+        = link_to edit_profile_path(current_user), class: 'btn-circle'
+          = icon 'paint-brush'

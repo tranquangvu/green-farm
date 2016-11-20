@@ -1,0 +1,77 @@
+/*
+ *= require_self
+ */
+@import 'mixins';
+@import 'bootstrap';
+@import 'bootstrap-sprockets';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'profiles/edit';
+@import 'profiles/show';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
+
+$ubuntu: 'Ubuntu', Helvetica, Arial, sans-serif;
+$light: 300;
+$normal: 400;
+$bold: 500;
+$bolder: 700;
+
+$bgcolor: #f6caa2;
+$modalbg: white;
+$modaltitle: white;
+$profile-username: #bcb5d8;
+$profile-email: #727272;
+
+body {
+  min-height: 100vh;
+  background: -webkit-linear-gradient(transparent, rgba( 110, 110, 110, .3)), -webkit-linear-gradient(350deg, rgba(250, 214, 195, .8) 30%, #B0EAE8 120%);
+  background: linear-gradient(transparent, rgba( 110, 110, 110, .3)), linear-gradient(100deg, rgba(250, 214, 195, .8) 30%, #B0EAE8 120%);
+  font-family: $ubuntu;
+  @include flexbox;
+  @include justify-content(center);
+  @include align-items(center);
+}
+
+.pmodal {
+  width: 610px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: $modalbg;
+  box-shadow: 0 20px 100px rgba(0, 0, 0, 0.2);
+
+  &-top,
+  &-middle,
+  &-bottom {
+    left: 0;
+    transition: .3s linear;
+  }
+
+  &-top {
+    padding: 30px;
+    height: 170px;
+    background-blend-mode: multiply;
+    background:
+    asset_url('profiles/modal_header_bg.png') no-repeat,
+    asset_url('profiles/modal_header_bg2.png') no-repeat;
+  }
+
+  &-middle {
+    padding: 0 30px;
+  }
+
+  &-bottom {
+    padding: 30px;
+  }
+
+  &-title {
+    width: 100%;
+    margin: 0;
+    font-size: 28px;
+    font-weight: $bold;
+    color: $modaltitle;
+    letter-spacing: 0.02em;
+  }
+}

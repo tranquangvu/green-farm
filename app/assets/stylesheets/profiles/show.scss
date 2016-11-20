@@ -1,0 +1,52 @@
+$ubuntu: 'Ubuntu', Helvetica, Arial, sans-serif;
+$normal: 400;
+
+$profile-username: #bcb5d8;
+$profile-email: #727272;
+
+#profiles-show-container {
+  .pmodal {
+    &-profile-username {
+      margin: 0;
+      font-size: 18px;
+      font-weight: $normal;
+      line-height: 2;
+      color: $profile-username;
+    }
+
+    &-profile-email {
+      margin: 0;
+      font-size: 20px;
+      color: $profile-email;
+      font-weight: $normal;
+    }
+
+    &-actions {
+      @include flexbox;
+      @include justify-content(center);
+    }
+
+    .btn-circle {
+      width: 50px;
+      height: 50px;
+      background: #2BCAB6;
+      margin: 15px 10px;
+      color: #fff !important;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 50%;
+      @include flexbox;
+      @include justify-content(center);
+      @include align-items(center);
+      @include transition(all .3s ease-in-out);
+
+      &:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+}

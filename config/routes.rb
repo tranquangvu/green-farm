@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :profiles, only: [:show, :edit, :update]
+
   namespace :api do
     namespace :v1 do
       post '/users/sign_in', to: 'sessions#create'
