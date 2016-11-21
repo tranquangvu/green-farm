@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:email, :username, :password,
+                                 :password_confirmation, :current_password)
   end
 end

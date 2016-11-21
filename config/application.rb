@@ -15,16 +15,19 @@ module GreenFarm
   class Application < Rails::Application
     config.eager_load_paths << "#{Rails.root}/lib"
 
+    # api config
+    config.api_only = true
+
     # rack-cors
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :delete, :put]
-      end
-    end
+    # config.middleware.insert_before 0, "Rack::Cors" do
+    #   allow do
+    #     origins '*'
+    #     resource '*', :headers => :any, :methods => [:get, :post, :options, :delete, :put]
+    #   end
+    # end
 
     # rack-attack
-    config.middleware.use Rack::Attack
+    # config.middleware.use Rack::Attack
 
     #assets path bower
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')

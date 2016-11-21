@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       post    '/values',              to: 'values#create'
       post    '/values/create_list',  to: 'values#create_list'
       get     '/devices',             to: 'devices#index'
+      get     '/profile',             to: 'profiles#show'
+      put     '/profile',             to: 'profiles#update'
+      patch   '/profile',             to: 'profiles#update'
 
       resources :farms, only: [:index, :show] do
         member do

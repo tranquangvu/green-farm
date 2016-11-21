@@ -1,4 +1,4 @@
-class Api::V1::FarmsController < Api::V1::ApiController
+class Api::V1::FarmsController < Api::ApiController
   before_action :set_farm, only: [:show, :sensor_data]
 
   def index
