@@ -1,62 +1,95 @@
 #inspecter-farms-show-container
-  .row#current-value
-    .col-md-3.attribute
-      .card
-        .card-head
-          | Temperature
-          span.sub-head
-          | (*C)
-        .card-body
-          #temp-chart.circle-chart data-size="200" data-thickness="18"
-            .chart-center
-              span.chart-value 32
-              .chart-label Good
-        ul.card-footer
-          li Accepted Min: #{20}
-          li Accepted Max: #{45}
+  .card#current-value
+    .card-head.style-primary
+      header Current sensor value
+    .card-body
+      .row
+        .col-md-3.attribute
+          .card
+            .card-head
+              | Temperature
+              span.sub-head
+              | (*C)
+            .card-body
+              #temp-chart.circle-chart data-size="200" data-thickness="18"
+                .chart-center
+                  span.chart-value 32
+                  .chart-label Good
+            ul.card-footer
+              li Accepted Min: #{20}
+              li Accepted Max: #{45}
 
-    .col-md-3.attribute
-      .card
-        .card-head
-          | Humidity
-          span.sub-head
-            | (%)
-        .card-body
-          #humid-chart.circle-chart data-size="200" data-thickness="18"
-            .chart-center
-              span.chart-value 32
-              .chart-label Good
-        ul.card-footer
-          li Accepted Min: #{20}
-          li Accepted Max: #{45}
-    .col-md-3.attribute
-      .card
-        .card-head
-          | Bright
-          span.sub-head
-            | (Lx)
-        .card-body
-          #bright-chart.circle-chart data-size="200" data-thickness="18"
-            .chart-center
-              span.chart-value 32
-              .chart-label Good
-        ul.card-footer
-          li Accepted Min: #{20}
-          li Accepted Max: #{45}
-    .col-md-3.attribute
-      .card
-        .card-head
-          | Soil moisture
-          span.sub-head
-          | (%)
-        .card-body
-          #soil-moisture-chart.circle-chart data-size="200" data-thickness="18"
-            .chart-center
-              span.chart-value 32
-              .chart-label Good
-        ul.card-footer
-          li Accepted Min: #{20}
-          li Accepted Max: #{45}
+        .col-md-3.attribute
+          .card
+            .card-head
+              | Humidity
+              span.sub-head
+                | (%)
+            .card-body
+              #humid-chart.circle-chart data-size="200" data-thickness="18"
+                .chart-center
+                  span.chart-value 32
+                  .chart-label Good
+            ul.card-footer
+              li Accepted Min: #{20}
+              li Accepted Max: #{45}
+        .col-md-3.attribute
+          .card
+            .card-head
+              | Bright
+              span.sub-head
+                | (Lux)
+            .card-body
+              #bright-chart.circle-chart data-size="200" data-thickness="18"
+                .chart-center
+                  span.chart-value 32
+                  .chart-label Good
+            ul.card-footer
+              li Accepted Min: #{20}
+              li Accepted Max: #{45}
+        .col-md-3.attribute
+          .card
+            .card-head
+              | Soil moisture
+              span.sub-head
+              | (%)
+            .card-body
+              #soil-moisture-chart.circle-chart data-size="200" data-thickness="18"
+                .chart-center
+                  span.chart-value 32
+                  .chart-label Good
+            ul.card-footer
+              li Accepted Min: #{20}
+              li Accepted Max: #{45}
+  .card#device-control-panel
+    .card-head.style-primary
+      header Device Control Panel
+    .card-body
+      table.table
+        thead
+          tr
+            td #
+            td Name
+            td Status
+        tbody
+          tr
+            td 1
+            td Đèn chiếu sáng
+            td
+              input#switch-led.switch.switch-shadow type="checkbox"
+              label for="switch-led"
+          tr
+            td 2
+            td Hệ thống bơm nước
+            td
+              input#switch-servo-water.switch.switch-shadow type="checkbox"
+              label for="switch-servo-water"
+          tr
+            td 3
+            td Hệ thống phun sươn
+            td
+              input#switch-servo-dew.switch.switch-shadow type="checkbox"
+              label for="switch-servo-dew"
 
 javascript:
   var socket = io('http://0.0.0.0:5001');
@@ -90,8 +123,8 @@ javascript:
     startAngle: 1.5 * Math.PI,
     lineCap: 'round',
     value: .75,
-    emptyFill: '#f5f5f5',
-    fill: { 'color': '#4caf50' },
+    emptyFill: '#fafafa',
+    fill: { 'color': '#8ce196' },
     animation: false
   });
 
@@ -99,22 +132,22 @@ javascript:
     startAngle: 1.5 * Math.PI,
     lineCap: 'round',
     value: .75,
-    emptyFill: '#f5f5f5',
-    fill: { 'color': '#4caf50' }
+    emptyFill: '#fafafa',
+    fill: { 'color': '#8ce196' }
   });
 
   $('#bright-chart').circleProgress({
     startAngle: 1.5 * Math.PI,
     lineCap: 'round',
     value: .75,
-    emptyFill: '#f5f5f5',
-    fill: { 'color': '#4caf50' }
+    emptyFill: '#fafafa',
+    fill: { 'color': '#8ce196' }
   });
 
   $('#soil-moisture-chart').circleProgress({
     startAngle: 1.5 * Math.PI,
     lineCap: 'round',
     value: .75,
-    emptyFill: '#f5f5f5',
-    fill: { 'color': '#4caf50' }
+    emptyFill: '#fafafa',
+    fill: { 'color': '#8ce196' }
   });

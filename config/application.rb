@@ -16,7 +16,7 @@ module GreenFarm
     config.eager_load_paths << "#{Rails.root}/lib"
 
     # api config
-    config.api_only = true
+    # config.api_only = true
 
     # rack-cors
     # config.middleware.insert_before 0, "Rack::Cors" do
