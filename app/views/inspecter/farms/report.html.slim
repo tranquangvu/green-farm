@@ -1,0 +1,89 @@
+#inspecter-farms-report
+  .card#current-value
+    .card-head.style-primary
+      header Reporter
+    .card-body
+      .row#filter
+        = form_tag report_inspecter_farm_path, method: :get, class: 'form' do |f|
+          .col-md-6
+            .form-group
+              = text_field_tag :start_date, nil, class: 'datepicker form-control'
+              = label_tag :start_date
+          .col-md-6
+            .form-group
+              = text_field_tag :end_date, nil, class: 'datepicker form-control'
+              = label_tag :end_date
+          .col-md-offset-3.col-md-12
+            .form-group
+              .checkbox-inline.checkbox-styled
+                label
+                  = check_box_tag 'props[]', :temperature, true
+                  span Nhiet do
+              .checkbox-inline.checkbox-styled
+                label
+                  = check_box_tag 'props[]', :humidity, true
+                  span Do am
+              .checkbox-inline.checkbox-styled
+                label
+                  = check_box_tag 'props[]', :light, true
+                  span Anh sang
+              .checkbox-inline.checkbox-styled
+                label
+                  = check_box_tag 'props[]', :soil_moisture, true
+                  span Do am dat
+          .col-md-12
+            .from-group
+              = submit_tag 'Filter', class: 'btn ink-reaction btn-raised btn-primary'
+      table#datatable.table.table-striped.table-hover
+        thead
+          tr
+            th #
+            th Thời điểm
+            th Vườn
+            th IP
+            th Nhiệt độ
+            th Độ ẩm
+            th Ánh sáng
+            th Độ ẩm đất
+        tbody
+          tr
+            td 1
+            td 2016-11-20 10:20:00
+            td Vuon 1
+            td 192.168.0.114
+            td 37 (*C)
+            td 45 (%)
+            td 3500 (Lx)
+            td 50 (%)
+          tr
+            td 1
+            td 2016-11-20 10:20:00
+            td Vuon 1
+            td 192.168.0.114
+            td 37 (*C)
+            td 45 (%)
+            td 3500 (Lx)
+            td 50 (%)
+      #download
+        = link_to 'Export To Excel', '#', class: 'btn ink-reaction btn-raised btn-accent'
+        = link_to 'Export To CSV', '#', class: 'btn ink-reaction btn-raised btn-accent'
+
+javascript:
+  $('#datatable').DataTable({
+    "dom": 'lCfrtip',
+    "order": [],
+    "language": {
+      "lengthMenu": '_MENU_ entries per page',
+      "paginate": {
+        "previous": '<i class="fa fa-angle-left"></i>',
+        "next": '<i class="fa fa-angle-right"></i>'
+      }
+    }
+  });
+
+  $('.datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    todayBtn: true,
+    autoclose: true,
+    todayHighlight: true
+  });

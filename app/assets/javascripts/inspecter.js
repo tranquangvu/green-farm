@@ -23,9 +23,8 @@
 //= require core/source/AppNavSearch
 //= require core/source/AppVendor
 //= require core/demo/demo
-//= require datatables.net/js/jquery.dataTables.min
-//= require libs/DataTables/extensions/ColVis/js/dataTables.colVis.min
-//= require libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require core/demo/dashboard

@@ -1,18 +1,19 @@
 class Inspecter::FarmsController < Inspecter::BaseController
-  before_action :farm, only: [:show]
+  before_action :set_farm, only: [:show, :report]
 
   def index
     @farms = current_user.farms
   end
 
   def show
-    @camera = farm.camera
-    @device = farm.device
+  end
+
+  def report
   end
 
   private
 
-  def farm
+  def set_farm
     @farm = Farm.find(params[:id])
   end
 end

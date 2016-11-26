@@ -1,0 +1,24 @@
+#inspecter-farms-report {
+  #filter {
+    margin-bottom: 30px;
+
+    .btn {
+      display: block;
+      width: 100%;
+    }
+
+    .checkbox-inline {
+      margin-right: 40px;
+    }
+  }
+
+  #download {
+    margin-top: 20px;
+    text-align: center;
+
+    .btn {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+}

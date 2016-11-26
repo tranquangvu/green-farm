@@ -34,8 +34,10 @@ Rails.application.routes.draw do
     get '/:farm_id', to: 'base#dashboard', as: :dashboard
 
     resources :farms, only: [:index, :show] do
+      member do
+        get 'report'
+      end
       resources :cameras, only: [:index, :show]
-      resources :sensors, only: [:index]
     end
   end
 end
