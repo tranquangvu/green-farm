@@ -1,0 +1,89 @@
+#inspecter-famrs-chart
+  #flot-chart.flot.height-7 data-title="Temperature" data-color="#0aa89e"
+
+javascript:
+  var chart = $("#flot-chart");
+
+  var o = this;
+  var labelColor = chart.css('color');
+  var data = [
+    {
+      label: 'Temperature',
+      unit: '*C',
+      data: [
+        [1, 100],
+        [2, 450],
+        [3, 800],
+        [4, 400],
+        [5, 2100],
+        [6, 2440],
+        [7, 3500],
+        [9, 2800],
+        [10, 2500],
+        [11, 1000],
+        [12, 500],
+      ],
+      last: true
+    }
+  ];
+
+  var options = {
+    colors: chart.data('color').split(','),
+    series: {
+      shadowSize: 0,
+      lines: {
+        show: true,
+        lineWidth: 2,
+        fill: true
+      },
+      points: {
+        show: true,
+        radius: 3,
+        lineWidth: 2
+      }
+    },
+    legend: {
+      show: false
+    },
+    xaxis: {
+      color: 'rgba(0, 0, 0, 0)',
+      font: {color: labelColor}
+    },
+    yaxis: {
+      font: {color: labelColor}
+    },
+    grid: {
+      borderWidth: 0,
+      color: labelColor,
+      hoverable: true
+    }
+  };
+
+  chart.width('100%');
+  var plot = $.plot(chart, data, options);
+
+  var tip, previousPoint = null;
+  chart.bind("plothover", function (event, pos, item) {
+    if (item) {
+      if (previousPoint !== item.dataIndex) {
+        previousPoint = item.dataIndex;
+
+        var x = item.datapoint[0];
+        var y = item.datapoint[1];
+        var tipLabel = '<strong>' + $(this).data('title') + '</strong>';
+        var tipContent = y + " " + item.series.unit + " on " + x;
+
+        if (tip !== undefined) {
+          $(tip).popover('hide');
+        }
+        tip = $('<div></div>').appendTo('body').css({left: item.pageX, top: item.pageY - 5, position: 'absolute'});
+        tip.popover({html: true, title: tipLabel, content: tipContent, placement: 'top'}).popover('show');
+      }
+    }
+    else {
+      if (tip !== undefined) {
+        $(tip).popover('hide');
+      }
+      previousPoint = null;
+    }
+  });

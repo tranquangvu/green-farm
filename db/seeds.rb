@@ -2,6 +2,7 @@ puts '--> Drop old data'
 User.delete_all
 Farm.delete_all
 Camera.delete_all
+Value.delete_all
 
 puts '--> Seed'
 user = User.create(

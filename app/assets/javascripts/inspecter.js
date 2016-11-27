@@ -27,11 +27,17 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
-//= require core/demo/dashboard
 //= require libs/circle-progress
 
 $(function(){
   window.setTimeout(function() { $(".notice").alert('close'); }, 8000);
+
+  $('.datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    todayBtn: true,
+    autoclose: true,
+    todayHighlight: true
+  });
 });
 
 function initCameraStream(target, host, username, password) {

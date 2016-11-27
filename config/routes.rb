@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :farms, only: [:index, :show] do
       member do
         get 'report'
+        get 'chart'
       end
       resources :cameras, only: [:index, :show]
     end

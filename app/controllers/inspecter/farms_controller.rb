@@ -1,5 +1,5 @@
 class Inspecter::FarmsController < Inspecter::BaseController
-  before_action :set_farm, only: [:show, :report]
+  before_action :set_farm, only: [:show, :report, :chart]
 
   def index
     @farms = current_user.farms
@@ -9,6 +9,9 @@ class Inspecter::FarmsController < Inspecter::BaseController
   end
 
   def report
+  end
+
+  def chart
   end
 
   private
