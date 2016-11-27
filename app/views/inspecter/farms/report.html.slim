@@ -7,11 +7,11 @@
         = form_tag report_inspecter_farm_path, method: :get, class: 'form' do |f|
           .col-md-6
             .form-group
-              = text_field_tag :start_date, nil, class: 'datepicker form-control'
+              = text_field_tag :start_date, nil, class: 'datepicker form-control', placeholder: 'Select start date'
               = label_tag :start_date
           .col-md-6
             .form-group
-              = text_field_tag :end_date, nil, class: 'datepicker form-control'
+              = text_field_tag :end_date, nil, class: 'datepicker form-control', placeholder: 'Select end date'
               = label_tag :end_date
           .col-md-offset-3.col-md-12
             .form-group

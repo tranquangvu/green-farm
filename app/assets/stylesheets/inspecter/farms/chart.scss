@@ -1,3 +1,19 @@
 #inspecter-famrs-chart {
+  #chart-filter {
+    margin-bottom: 30px;
 
+    .radio-inline {
+      margin-bottom: 10px !important;
+    }
+  }
+
+  .chart {
+    font-size: 16px;
+
+    .chart-title {
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-family: 'Raleway', sans-serif;
+    }
+  }
 }

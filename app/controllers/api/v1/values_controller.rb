@@ -20,6 +20,10 @@ class Api::V1::ValuesController < Api::ApiController
     end
   end
 
+  def temperature
+
+  end
+
   private
 
   def value_params

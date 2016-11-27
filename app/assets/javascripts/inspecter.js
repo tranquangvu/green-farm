@@ -38,6 +38,15 @@ $(function(){
     autoclose: true,
     todayHighlight: true
   });
+
+  $(".monthpicker").datepicker( {
+    format: "yyyy-mm",
+    startView: "months",
+    minViewMode: "months",
+    todayBtn: true,
+    autoclose: true,
+    todayHighlight: true
+  });
 });
 
 function initCameraStream(target, host, username, password) {

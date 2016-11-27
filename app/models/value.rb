@@ -21,6 +21,39 @@ class Value
     created_at
   end
 
+  def self.get_value_of_date(year:, month:, day:, prop: )
+    $project = {
+      "$project" => {
+        "year" => {
+          "$year" => "$created_at"
+        },
+        "month" => {
+          "$month" => "$created_at"
+        },
+        "day" => {
+          "$dayOfMonth" => "$created_at"
+        },
+        "hour" => {
+          "$hour" => "$created_at"
+        },
+        "minute" => {
+          "$minute" => "$created_at"
+        },
+        "#{prop}" => "$#{prop}",
+      }
+    }
+
+    $match = {
+      "$match" => {
+        "year" => year,
+        "month" => month,
+        "day" => day
+      }
+    }
+
+    self.collection.aggregate([$project, $match])
+  end
+
   def self.avg_in_hour_of_month(year:, month:, prop:)
     $project = {
       "$project" => {

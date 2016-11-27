@@ -1,89 +1,206 @@
 #inspecter-famrs-chart
-  #flot-chart.flot.height-7 data-title="Temperature" data-color="#0aa89e"
+  .card#current-value
+    .card-head.style-primary
+      header Chart Drawing
+    .card-body
+      .row#chart-filter
+        .col-md-4
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quod fugit error magnam, consequatur eum, ipsa reprehenderit in magni quo impedit enim facere hic animi quos eius dolores nulla!
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, laborum. Quod animi ipsa enim reprehenderit ipsum incidunt accusamus natus laudantium nostrum odio aliquid voluptate vero quia, optio ex voluptas deserunt.
+        .col-md-8
+          .row
+            = form_tag '', class: 'form', id: 'chart-filter-form' do |f|
+              .col-md-12
+                label.radio-inline.radio-styled
+                  = radio_button_tag :chart_per, 'day', true
+                  span Draw chart per day
+                label.radio-inline.radio-styled
+                  = radio_button_tag :chart_per, 'month'
+                  span Draw chart per month
+              #chart-per-day.col-md-12
+                .form-group
+                  = text_field_tag :date, nil, class: 'datepicker form-control', placeholder: 'Select a date'
+                  = label_tag :date
+              #chart-per-month.col-md-12.hide
+                .form-group
+                  = text_field_tag :month, nil, class: 'monthpicker form-control', placeholder: 'Select a month'
+                  = label_tag :month
+                .from-group
+                  label.radio-inline.radio-styled
+                    = radio_button_tag :chart_month_exactness, 'hour', true
+                    span Exactness in hour
+                  label.radio-inline.radio-styled
+                    = radio_button_tag :chart_month_exactness, 'minute', false
+                    span Exactness in minute
+              .col-md-12
+                .form-group
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :temperature, true
+                      span Nhiet do
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :humidity, true
+                      span Do am
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :light, true
+                      span Anh sang
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :soil_moisture, true
+                      span Do am dat
+              .col-md-12
+                = submit_tag 'Draw Chart', class: 'btn btn-primary btn-block'
+      .card.chart
+        .card-body
+          h2.chart-title Temperature
+          #temperature-chart.flot.height-10 data-title="Temperature" data-unit="&#8451"
+      .card.chart
+        .card-body
+          h2.chart-title Humidity
+          #humidity-chart.flot.height-7 data-title="Humidity" data-color="#0aa89e"
+      .card.chart
+        .card-body
+          h2.chart-title Soil Moisture
+          #soil_moisture-chart.flot.height-7 data-title="Soil Moisture" data-color="#0aa89e"
+      .card.chart
+        .card-body
+          h2.chart-title Humidity
+          #light-chart.flot.height-7 data-title="Light Moisture" data-color="#0aa89e"
 
 javascript:
-  var chart = $("#flot-chart");
 
-  var o = this;
-  var labelColor = chart.css('color');
-  var data = [
-    {
-      label: 'Temperature',
-      unit: '*C',
-      data: [
-        [1, 100],
-        [2, 450],
-        [3, 800],
-        [4, 400],
-        [5, 2100],
-        [6, 2440],
-        [7, 3500],
-        [9, 2800],
-        [10, 2500],
-        [11, 1000],
-        [12, 500],
-      ],
-      last: true
-    }
-  ];
-
-  var options = {
-    colors: chart.data('color').split(','),
-    series: {
-      shadowSize: 0,
-      lines: {
-        show: true,
-        lineWidth: 2,
-        fill: true
+  function generateChartOptions(options) {
+    return {
+      colors: options.colors || '#0aa89e',
+      series: {
+        shadowSize: 0,
+        lines: {
+          show: true,
+          lineWidth: 2,
+          fill: true
+        },
+        points: {
+          show: true,
+          radius: 3,
+          lineWidth: 2
+        }
       },
-      points: {
-        show: true,
-        radius: 3,
-        lineWidth: 2
+      legend: {
+        show: false
+      },
+      xaxis: {
+        mode: 'time',
+        timeformat: '%H:%M',
+        minTickSize: [1, "hour"],
+        color: 'rgba(0, 0, 0, 0)',
+        font: {color: options.textColor || '#000'}
+      },
+      yaxis: {
+        font: {color: options.textColor || '#000'}
+      },
+      grid: {
+        borderWidth: 0,
+        color: options.textColor || '#000',
+        hoverable: true
       }
-    },
-    legend: {
-      show: false
-    },
-    xaxis: {
-      color: 'rgba(0, 0, 0, 0)',
-      font: {color: labelColor}
-    },
-    yaxis: {
-      font: {color: labelColor}
-    },
-    grid: {
-      borderWidth: 0,
-      color: labelColor,
-      hoverable: true
-    }
-  };
+    };
+  }
 
-  chart.width('100%');
-  var plot = $.plot(chart, data, options);
-
-  var tip, previousPoint = null;
-  chart.bind("plothover", function (event, pos, item) {
+  function generateTooltip (event, pos, item, tooltip) {
     if (item) {
-      if (previousPoint !== item.dataIndex) {
-        previousPoint = item.dataIndex;
+      if (tooltip.previousPoint !== item.dataIndex) {
+        tooltip.previousPoint = item.dataIndex;
 
         var x = item.datapoint[0];
         var y = item.datapoint[1];
-        var tipLabel = '<strong>' + $(this).data('title') + '</strong>';
-        var tipContent = y + " " + item.series.unit + " on " + x;
+        var tipLabel = '<strong>' + tooltip.title + '</strong>';
+        var tipContent = y + tooltip.unit + " on " + x;
 
-        if (tip !== undefined) {
-          $(tip).popover('hide');
+        if (tooltip.tip !== undefined) {
+          $(tooltip.tip).popover('hide');
         }
-        tip = $('<div></div>').appendTo('body').css({left: item.pageX, top: item.pageY - 5, position: 'absolute'});
-        tip.popover({html: true, title: tipLabel, content: tipContent, placement: 'top'}).popover('show');
+        tooltip.tip = $('<div></div>').appendTo('body').css({left: item.pageX, top: item.pageY + $('body').scrollTop() - 5, position: 'absolute'});
+        tooltip.tip.popover({html: true, title: tipLabel, content: tipContent, placement: 'top'}).popover('show');
       }
     }
     else {
-      if (tip !== undefined) {
-        $(tip).popover('hide');
+      if (tooltip.tip !== undefined) {
+        $(tooltip.tip).popover('hide');
       }
-      previousPoint = null;
+      tooltip.previousPoint = null;
     }
+  }
+
+  function drawTemperatureChart(data) {
+    var chart = $("#temperature-chart");
+    var plot = $.plot(chart, data, generateChartOptions({
+          colors: ['#0aa89e'],
+          textColor: '#313534'
+        }));
+    var tooltip = {
+      tip: null,
+      previousPoint: null,
+      title: chart.data('title'),
+      unit: chart.data('unit')
+    };
+    chart.bind("plothover", function (event, pos, item) {
+      return generateTooltip(event, pos, item, tooltip);
+    });
+  }
+
+  var currentChartPer, currentChartMonthExactness;
+
+  $(function() {
+    // set default radio cheked for chart_per
+    var chartPerRadios = $('input:radio[name=chart_per]');
+    chartPerRadios.filter('[value=day]').prop('checked', true);
+    currentChartPer = chartPerRadios.val();
+    $('#chart-per-month').addClass('hide');
+
+    // set default radio cheked for chart_month_exactness
+    var chartMonthExactnessRadios = $('input:radio[name=chart_month_exactness]');
+    chartMonthExactnessRadios.filter('[value=hour]').prop('checked', true);
+    currentChartMonthExactness = chartMonthExactnessRadios.val();
+  });
+
+  $('input:radio[name=chart_per]').change(function() {
+    currentChartPer = $(this).val();
+
+    if ($(this).val() === 'day') {
+      $('#chart-per-day').removeClass('hide');
+      $('#chart-per-month').addClass('hide');
+    }
+
+    if ($(this).val() === 'month') {
+      $('#chart-per-day').addClass('hide');
+      $('#chart-per-month').removeClass('hide');
+    }
+  });
+
+  $('#chart-filter-form').submit(function(e) {
+    e.preventDefault();
+
+    if (currentChartPer === 'day') {
+      var date = $('#date').val();
+
+      $.ajax({
+        type: 'GET',
+        url: 'aip/values/temperature',
+        data: {
+          date: date.val()
+        }
+        success: function (data) {
+
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+    else {
+
+    }
+    return false;
   });
