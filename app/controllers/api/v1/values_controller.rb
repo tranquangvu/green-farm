@@ -20,8 +20,18 @@ class Api::V1::ValuesController < Api::ApiController
     end
   end
 
-  def temperature
-
+  def temperature_of_date
+    if (params[:year].blank? || params[:month].blank? || params[:day].blank?)
+      return invalid_params
+    else
+      response_data = Value.get_value_of_date(
+        year: params[:year],
+        month: params[:month],
+        day: params[:day],
+        prop: :temperature
+      ).as_json(except: [:_id])
+      render json: @response.success(response_data), status: :ok
+    end
   end
 
   private
