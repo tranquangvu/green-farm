@@ -11,63 +11,60 @@
           .row
             = form_tag '', class: 'form', id: 'chart-filter-form' do |f|
               .col-md-12
+                = hidden_field_tag :farm_id, @farm.id
+              .col-md-12
+                p Select chart type:
                 label.radio-inline.radio-styled
                   = radio_button_tag :chart_per, 'day', true
-                  span Draw chart per day
+                  span Chart of the date
                 label.radio-inline.radio-styled
                   = radio_button_tag :chart_per, 'month'
-                  span Draw chart per month
+                  span Chart of the month
               #chart-per-day.col-md-12
                 .form-group
-                  = text_field_tag :date, nil, class: 'datepicker form-control', placeholder: 'Select a date'
+                  = text_field_tag :date, Time.now.strftime("%Y-%m-%d"), class: 'datepicker form-control', placeholder: 'Select a date'
                   = label_tag :date
               #chart-per-month.col-md-12.hide
                 .form-group
-                  = text_field_tag :month, nil, class: 'monthpicker form-control', placeholder: 'Select a month'
+                  = text_field_tag :month, Time.now.strftime("%Y-%m"), class: 'monthpicker form-control', placeholder: 'Select a month'
                   = label_tag :month
-                .from-group
-                  label.radio-inline.radio-styled
-                    = radio_button_tag :chart_month_exactness, 'hour', true
-                    span Exactness in hour
-                  label.radio-inline.radio-styled
-                    = radio_button_tag :chart_month_exactness, 'minute', false
-                    span Exactness in minute
               .col-md-12
                 .form-group
+                  p Select properties:
                   .checkbox-inline.checkbox-styled
                     label
-                      = check_box_tag 'props[]', :temperature, true
-                      span Nhiet do
+                      = check_box_tag 'props[]', :temperature, true, id: 'props_temperature'
+                      span Temperature
                   .checkbox-inline.checkbox-styled
                     label
-                      = check_box_tag 'props[]', :humidity, true
-                      span Do am
+                      = check_box_tag 'props[]', :humidity, true, id: 'props_humidity'
+                      span Humidity
                   .checkbox-inline.checkbox-styled
                     label
-                      = check_box_tag 'props[]', :light, true
-                      span Anh sang
+                      = check_box_tag 'props[]', :light, true, id: 'props_light'
+                      span Light
                   .checkbox-inline.checkbox-styled
                     label
-                      = check_box_tag 'props[]', :soil_moisture, true
-                      span Do am dat
+                      = check_box_tag 'props[]', :soil_moisture, true, id: 'props_soil_moisture'
+                      span Soil Moisture
               .col-md-12
                 = submit_tag 'Draw Chart', class: 'btn btn-primary btn-block'
-      .card.chart
+      #temperature-chart-area.card.chart.hide
         .card-body
           h2.chart-title Temperature
-          #temperature-chart.flot.height-10 data-title="Temperature" data-unit="&#8451"
-      .card.chart
+          #temperature-chart.flot.height-7 data-title="Temperature" data-unit="&#8451"
+      #humidity-chart-area.card.chart.hide
         .card-body
           h2.chart-title Humidity
-          #humidity-chart.flot.height-7 data-title="Humidity" data-color="#0aa89e"
-      .card.chart
+          #humidity-chart.flot.height-7 data-title="Humidity" data-unit="%"
+      #light-chart-area.card.chart.hide
+        .card-body
+          h2.chart-title Light
+          #light-chart.flot.height-7 data-title="Light" data-unit="lux"
+      #soil_moisture-chart-area.card.chart.hide
         .card-body
           h2.chart-title Soil Moisture
-          #soil_moisture-chart.flot.height-7 data-title="Soil Moisture" data-color="#0aa89e"
-      .card.chart
-        .card-body
-          h2.chart-title Humidity
-          #light-chart.flot.height-7 data-title="Light Moisture" data-color="#0aa89e"
+          #soil_moisture-chart.flot.height-7 data-title="Soil Moisture" data-unit="%"
 
 javascript:
 
@@ -92,8 +89,8 @@ javascript:
       },
       xaxis: {
         mode: 'time',
+        timezone: 'browser',
         timeformat: '%H:%M',
-        minTickSize: [1, "hour"],
         color: 'rgba(0, 0, 0, 0)',
         font: {color: options.textColor || '#000'}
       },
@@ -103,7 +100,8 @@ javascript:
       grid: {
         borderWidth: 0,
         color: options.textColor || '#000',
-        hoverable: true
+        hoverable: true,
+        margin: options.gridMargin
       }
     };
   }
@@ -114,9 +112,10 @@ javascript:
         tooltip.previousPoint = item.dataIndex;
 
         var x = item.datapoint[0];
+        var xToDate = new Date(x);
         var y = item.datapoint[1];
         var tipLabel = '<strong>' + tooltip.title + '</strong>';
-        var tipContent = y + tooltip.unit + " on " + x;
+        var tipContent = y + tooltip.unit + " on " + xToDate.getHours() + 'h' + xToDate.getMinutes() + '\'';
 
         if (tooltip.tip !== undefined) {
           $(tooltip.tip).popover('hide');
@@ -135,6 +134,7 @@ javascript:
 
   function drawTemperatureChart(data) {
     var chart = $("#temperature-chart");
+        chart.css({"width": "100%"});
     var plot = $.plot(chart, data, generateChartOptions({
           colors: ['#0aa89e'],
           textColor: '#313534'
@@ -150,20 +150,64 @@ javascript:
     });
   }
 
-  var currentChartPer, currentChartMonthExactness;
+  function drawHumidityChart(data) {
+    var chart = $("#humidity-chart");
+        chart.css({"width": "100%"});
+    var plot = $.plot(chart, data, generateChartOptions({
+          colors: ['#2196f3'],
+          textColor: '#313534',
+          gridMargin: -8
+        }));
+    var tooltip = {
+      tip: null,
+      previousPoint: null,
+      title: chart.data('title'),
+      unit: chart.data('unit')
+    };
+    chart.bind("plothover", function (event, pos, item) {
+      return generateTooltip(event, pos, item, tooltip);
+    });
+  }
 
-  $(function() {
-    // set default radio cheked for chart_per
-    var chartPerRadios = $('input:radio[name=chart_per]');
-    chartPerRadios.filter('[value=day]').prop('checked', true);
-    currentChartPer = chartPerRadios.val();
-    $('#chart-per-month').addClass('hide');
+  function drawLightChart(data) {
+    var chart = $("#light-chart");
+        chart.css({"width": "100%"});
+    var plot = $.plot(chart, data, generateChartOptions({
+          colors: ['#FFC107'],
+          textColor: '#313534',
+          gridMargin: -15
+        }));
+    var tooltip = {
+      tip: null,
+      previousPoint: null,
+      title: chart.data('title'),
+      unit: chart.data('unit')
+    };
+    chart.bind("plothover", function (event, pos, item) {
+      return generateTooltip(event, pos, item, tooltip);
+    });
+  }
 
-    // set default radio cheked for chart_month_exactness
-    var chartMonthExactnessRadios = $('input:radio[name=chart_month_exactness]');
-    chartMonthExactnessRadios.filter('[value=hour]').prop('checked', true);
-    currentChartMonthExactness = chartMonthExactnessRadios.val();
-  });
+  function drawSoilMoistureChart(data) {
+    var chart = $("#soil_moisture-chart");
+        chart.css({"width": "100%"});
+    var plot = $.plot(chart, data, generateChartOptions({
+          colors: ['#9C27B0'],
+          textColor: '#313534',
+          gridMargin: -8
+        }));
+    var tooltip = {
+      tip: null,
+      previousPoint: null,
+      title: chart.data('title'),
+      unit: chart.data('unit')
+    };
+    chart.bind("plothover", function (event, pos, item) {
+      return generateTooltip(event, pos, item, tooltip);
+    });
+  }
+
+  var currentChartPer =  $('input:radio[name=chart_per]').val();
 
   $('input:radio[name=chart_per]').change(function() {
     currentChartPer = $(this).val();
@@ -182,17 +226,47 @@ javascript:
   $('#chart-filter-form').submit(function(e) {
     e.preventDefault();
 
-    if (currentChartPer === 'day') {
-      var date = $('#date').val();
+    var temperatureCb = $('#props_temperature'),
+        humidityCb = $('#props_humidity'),
+        lightCb = $('#props_light'),
+        soilMoistureCb = $('#props_soil_moisture');
+
+    var temperatureChartArea = $('#temperature-chart-area'),
+        humidityChartArea = $('#humidity-chart-area'),
+        soilMoistureChartArea = $('#soil_moisture-chart-area'),
+        lightChartArea = $('#light-chart-area');
+
+    var date = new Date($('#date').val()),
+        month = new Date($('#month').val()),
+        farmId = $('#farm_id').val();
+
+    var isPerDay = currentChartPer === 'day';
+
+    // draw temperature chart
+    if (temperatureCb.prop('checked')) {
+      var url = isPerDay ? '/inspecter/values/temperature_of_date' :
+        '/inspecter/values/temperature_of_month';
 
       $.ajax({
         type: 'GET',
-        url: 'aip/values/temperature',
+        url: url,
         data: {
-          date: date.val()
-        }
+          farm_id: farmId,
+          year: isPerDay ? date.getFullYear() : month.getFullYear(),
+          month: isPerDay ? date.getMonth() + 1 : month.getMonth() + 1,
+          day: isPerDay ? date.getDate() : null
+        },
         success: function (data) {
-
+          debugger
+          var timeData = data.map(function(dt) {
+            var date = new Date(
+              dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+              dt.hour + ':' + dt.minute + ':00'
+            );
+            return [date.getTime(), dt.temperature]
+          });
+          drawTemperatureChart([{label: 'Temperature', data: timeData}]);
+          temperatureChartArea.removeClass('hide');
         },
         error: function (err) {
           console.log(err);
@@ -200,7 +274,109 @@ javascript:
       });
     }
     else {
-
+      temperatureChartArea.addClass('hide');
     }
+
+    // draw humidity chart
+    if (humidityCb.prop('checked')) {
+      var url = isPerDay ? '/inspecter/values/humidity_of_date' :
+        '/inspecter/values/humidity_of_month';
+
+      $.ajax({
+        type: 'GET',
+        url: url,
+        data: {
+          farm_id: farmId,
+          year: isPerDay ? date.getFullYear() : month.getFullYear(),
+          month: isPerDay ? date.getMonth() + 1 : month.getMonth() + 1,
+          day: isPerDay ? date.getDate() : null
+        },
+        success: function (data) {
+          var timeData = data.map(function(dt) {
+            var date = new Date(
+              dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+              dt.hour + ':' + dt.minute + ':00'
+            );
+            return [date.getTime(), dt.humidity]
+          });
+          drawHumidityChart([{label: 'Humidity', data: timeData}]);
+          humidityChartArea.removeClass('hide');
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+    else {
+      humidityChartArea.addClass('hide');
+    }
+
+    // draw light chart
+    if (lightCb.prop('checked')) {
+      var url = isPerDay ? '/inspecter/values/light_of_date' :
+        '/inspecter/values/light_of_month';
+
+      $.ajax({
+        type: 'GET',
+        url: url,
+        data: {
+          farm_id: farmId,
+          year: isPerDay ? date.getFullYear() : month.getFullYear(),
+          month: isPerDay ? date.getMonth() + 1 : month.getMonth() + 1,
+          day: isPerDay ? date.getDate() : null
+        },
+        success: function (data) {
+          var timeData = data.map(function(dt) {
+            var date = new Date(
+              dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+              dt.hour + ':' + dt.minute + ':00'
+            );
+            return [date.getTime(), dt.light]
+          });
+          drawLightChart([{label: 'Light', data: timeData}]);
+          lightChartArea.removeClass('hide');
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+    else {
+      lightChartArea.addClass('hide');
+    }
+
+    if (soilMoistureCb.prop('checked')) {
+      var url = isPerDay ? '/inspecter/values/soil_moisture_of_date' :
+        '/inspecter/values/soil_moisture_of_month';
+
+      $.ajax({
+        type: 'GET',
+        url: url,
+        data: {
+          farm_id: farmId,
+          year: isPerDay ? date.getFullYear() : month.getFullYear(),
+          month: isPerDay ? date.getMonth() + 1 : month.getMonth() + 1,
+          day: isPerDay ? date.getDate() : null
+        },
+        success: function (data) {
+          var timeData = data.map(function(dt) {
+            var date = new Date(
+              dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+              dt.hour + ':' + dt.minute + ':00'
+            );
+            return [date.getTime(), dt.soil_moisture]
+          });
+          drawSoilMoistureChart([{label: 'Soil Moisture', data: timeData}]);
+          soilMoistureChartArea.removeClass('hide');
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+    else {
+      soilMoistureChartArea.addClass('hide');
+    }
+
     return false;
   });

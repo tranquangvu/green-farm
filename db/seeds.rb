@@ -1,6 +1,7 @@
 puts '--> Drop old data'
 User.delete_all
 Farm.delete_all
+Device.delete_all
 Camera.delete_all
 Value.delete_all
 

@@ -21,7 +21,7 @@ class Value
     created_at
   end
 
-  def self.get_value_of_date(year:, month:, day:, prop: )
+  def self.get_value_of_date(device_id:, year:, month:, day:, prop: )
     $project = {
       "$project" => {
         "year" => {
@@ -39,12 +39,14 @@ class Value
         "minute" => {
           "$minute" => "$created_at"
         },
+        "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
       }
     }
 
     $match = {
       "$match" => {
+        "device_id" => device_id,
         "year" => year,
         "month" => month,
         "day" => day
@@ -54,7 +56,7 @@ class Value
     self.collection.aggregate([$project, $match])
   end
 
-  def self.avg_in_hour_of_month(year:, month:, prop:)
+  def self.avg_in_hour_of_month(device_id:, year:, month:, prop:)
     $project = {
       "$project" => {
         "year" => {
@@ -66,12 +68,14 @@ class Value
         "hour" => {
           "$hour" => "$created_at"
         },
+        "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
       }
     }
 
     $match = {
       "$match" => {
+        "device_id" => device_id,
         "year" => year,
         "month" => month
       }
@@ -80,11 +84,12 @@ class Value
     $group = {
       "$group" => {
         "_id" => {
+          "device_id" => "$device_id",
           "year" => "$year",
           "month" => "$month",
           "hour" => "$hour"
         },
-        "avg_#{prop}" => {
+        "#{prop}" => {
           "$avg" => "$#{prop}"
         }
       }
@@ -99,7 +104,7 @@ class Value
     self.collection.aggregate([$project, $match, $group, $sort])
   end
 
-  def self.avg_in_minute_of_month(year:, month:, prop:)
+  def self.avg_in_minute_of_month(device_id:, year:, month:, prop:)
     $project = {
       "$project" => {
         "year" => {
@@ -114,12 +119,14 @@ class Value
         "minute" => {
           "$minute" => "$created_at"
         },
+        "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
       }
     }
 
     $match = {
       "$match" => {
+        "device_id" => device_id,
         "year" => year,
         "month" => month
       }
@@ -128,12 +135,13 @@ class Value
     $group = {
       "$group" => {
         "_id" => {
+          "device_id" => "$device_id",
           "year" => "$year",
           "month" => "$month",
           "hour" => "$hour",
           "minute" => "$minute",
         },
-        "avg_#{prop}" => {
+        "#{prop}" => {
           "$avg" => "$#{prop}"
         }
       }
