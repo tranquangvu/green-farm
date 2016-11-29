@@ -4,36 +4,45 @@
       header Reporter
     .card-body
       .row#filter
-        = form_tag report_inspecter_farm_path, method: :get, class: 'form' do |f|
-          .col-md-6
-            .form-group
-              = text_field_tag :start_date, @start_date, class: 'datepicker form-control', placeholder: 'Select start date'
-              = label_tag :start_date
-          .col-md-6
-            .form-group
-              = text_field_tag :end_date, @end_date, class: 'datepicker form-control', placeholder: 'Select end date'
-              = label_tag :end_date
-          .col-md-offset-3.col-md-12
-            .form-group
-              .checkbox-inline.checkbox-styled
-                label
-                  = check_box_tag 'props[]', :temperature, @props.include?(:temperature)
-                  span Temperature
-              .checkbox-inline.checkbox-styled
-                label
-                  = check_box_tag 'props[]', :humidity, @props.include?(:humidity)
-                  span Humidity
-              .checkbox-inline.checkbox-styled
-                label
-                  = check_box_tag 'props[]', :light, @props.include?(:light)
-                  span Light
-              .checkbox-inline.checkbox-styled
-                label
-                  = check_box_tag 'props[]', :soil_moisture, @props.include?(:soil_moisture)
-                  span Soil Moisture
-          .col-md-12
-            .from-group
-              = submit_tag 'Filter', class: 'btn ink-reaction btn-raised btn-primary'
+        .col-md-4
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quod fugit error magnam, consequatur eum, ipsa reprehenderit in magni quo impedit enim facere hic animi quos eius dolores nulla!
+        .col-md-8
+          .row
+            = form_tag report_inspecter_farm_path, method: :get, class: 'form' do |f|
+              .col-md-6
+                .form-group
+                  = text_field_tag :start_date, @start_date, class: 'datepicker form-control', placeholder: 'Select start date'
+                  = label_tag :start_date
+              .col-md-6
+                .form-group
+                  = text_field_tag :end_date, @end_date, class: 'datepicker form-control', placeholder: 'Select end date'
+                  = label_tag :end_date
+              .col-md-12
+                .form-group
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :temperature, @props.include?(:temperature)
+                      span Temperature
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :humidity, @props.include?(:humidity)
+                      span Humidity
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :light, @props.include?(:light)
+                      span Light
+                  .checkbox-inline.checkbox-styled
+                    label
+                      = check_box_tag 'props[]', :soil_moisture, @props.include?(:soil_moisture)
+                      span Soil Moisture
+              .col-md-12.btn-group
+                  = submit_tag 'Filter', class: 'btn ink-reaction btn-raised btn-primary'
+                  = link_to 'Export To Excel',
+                            report_inspecter_farm_path(format: 'xlsx', start_date: @start_date, end_date: @end_date, props: @props),
+                            class: 'btn ink-reaction btn-raised btn-accent'
+                  = link_to 'Export To CSV',
+                            report_inspecter_farm_path(format: 'csv', start_date: @start_date, end_date: @end_date, props: @props),
+                            class: 'btn ink-reaction btn-raised btn-warning'
       table#datatable.table.table-striped.table-hover
         thead
           tr
@@ -60,9 +69,6 @@
                 td= dt.light.round(2).to_s + " lux"
               - if @props.include?(:soil_moisture)
                 td= dt.soil_moisture.round(2).to_s + " %"
-      #download
-        = link_to 'Export To Excel', '#', class: 'btn ink-reaction btn-raised btn-accent'
-        = link_to 'Export To CSV', '#', class: 'btn ink-reaction btn-raised btn-accent'
 
 javascript:
   $('#datatable').DataTable({

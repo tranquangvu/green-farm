@@ -2,9 +2,15 @@
   #filter {
     margin-bottom: 30px;
 
-    .btn {
-      display: block;
-      width: 100%;
+    .btn-group {
+      @include flexbox;
+      @include justify-content(space-between);
+      @include align-items(center);
+
+      .btn {
+        @include flex(1);
+        margin: 0 5px;
+      }
     }
 
     .checkbox-inline {

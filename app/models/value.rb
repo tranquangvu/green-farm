@@ -21,7 +21,29 @@ class Value
     created_at
   end
 
-  def self.get_value_of_date(device_id:, year:, month:, day:, prop: )
+  def self.to_csv(props)
+    CSV.generate(headers: true) do |csv|
+      csv << props.map do |prop|
+        title = prop.to_s.humanize
+        title << case prop
+          when :temperature
+            ' (celsius)'
+          when :humidity, :soil_moisture
+            ' (%)'
+          when :light
+            ' (lux)'
+          else
+            ''
+        end
+      end
+
+      all.each do |record|
+        csv << props.map { |prop| record.send(prop) }
+      end
+    end
+  end
+
+  def self.get_value_of_date(device_id:, year:, month:, day:, prop:)
     $project = {
       "$project" => {
         "year" => {

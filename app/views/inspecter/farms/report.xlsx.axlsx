@@ -1,0 +1,31 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "00bcd4")
+  date_cell = style.add_style(format_code: "yyyy-mm-dd hh:mm:ss")
+
+  wb.add_worksheet(name: "Farm Data Report") do |sheet|
+    prop_titles = @props.map do |prop|
+      prop.to_s.humanize << case prop
+        when :temperature
+          ' (celsius)'
+        when :humidity, :soil_moisture
+          ' (%)'
+        when :light
+          ' (lux)'
+        else
+          ''
+      end
+    end
+
+    sheet.add_row prop_titles.unshift('Time'), style: Array.new(prop_titles.count, highlight_cell)
+
+    @data.each do |record|
+      prop_values = @props.map do |prop|
+        record.send(prop).round(2)
+      end
+
+      sheet.add_row prop_values.unshift(record.created_at), style: [date_cell]
+    end
+  end
+end
