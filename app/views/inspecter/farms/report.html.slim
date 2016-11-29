@@ -7,63 +7,59 @@
         = form_tag report_inspecter_farm_path, method: :get, class: 'form' do |f|
           .col-md-6
             .form-group
-              = text_field_tag :start_date, nil, class: 'datepicker form-control', placeholder: 'Select start date'
+              = text_field_tag :start_date, @start_date, class: 'datepicker form-control', placeholder: 'Select start date'
               = label_tag :start_date
           .col-md-6
             .form-group
-              = text_field_tag :end_date, nil, class: 'datepicker form-control', placeholder: 'Select end date'
+              = text_field_tag :end_date, @end_date, class: 'datepicker form-control', placeholder: 'Select end date'
               = label_tag :end_date
           .col-md-offset-3.col-md-12
             .form-group
               .checkbox-inline.checkbox-styled
                 label
-                  = check_box_tag 'props[]', :temperature, true
-                  span Nhiet do
+                  = check_box_tag 'props[]', :temperature, @props.include?(:temperature)
+                  span Temperature
               .checkbox-inline.checkbox-styled
                 label
-                  = check_box_tag 'props[]', :humidity, true
-                  span Do am
+                  = check_box_tag 'props[]', :humidity, @props.include?(:humidity)
+                  span Humidity
               .checkbox-inline.checkbox-styled
                 label
-                  = check_box_tag 'props[]', :light, true
-                  span Anh sang
+                  = check_box_tag 'props[]', :light, @props.include?(:light)
+                  span Light
               .checkbox-inline.checkbox-styled
                 label
-                  = check_box_tag 'props[]', :soil_moisture, true
-                  span Do am dat
+                  = check_box_tag 'props[]', :soil_moisture, @props.include?(:soil_moisture)
+                  span Soil Moisture
           .col-md-12
             .from-group
               = submit_tag 'Filter', class: 'btn ink-reaction btn-raised btn-primary'
       table#datatable.table.table-striped.table-hover
         thead
           tr
-            th #
-            th Thời điểm
-            th Vườn
-            th IP
-            th Nhiệt độ
-            th Độ ẩm
-            th Ánh sáng
-            th Độ ẩm đất
+            th Time
+            th Farm Name
+            - if @props.include?(:temperature)
+              th Temperature
+            - if @props.include?(:humidity)
+              th Humidity
+            - if @props.include?(:light)
+              th Light
+            - if @props.include?(:soil_moisture)
+              th Soil Moisture
         tbody
-          tr
-            td 1
-            td 2016-11-20 10:20:00
-            td Vuon 1
-            td 192.168.0.114
-            td 37 (*C)
-            td 45 (%)
-            td 3500 (Lx)
-            td 50 (%)
-          tr
-            td 1
-            td 2016-11-20 10:20:00
-            td Vuon 1
-            td 192.168.0.114
-            td 37 (*C)
-            td 45 (%)
-            td 3500 (Lx)
-            td 50 (%)
+          - @data.each do |dt|
+            tr
+              td= dt.created_at.strftime('%Y-%m-%d %H:%M')
+              td= @farm.name
+              - if @props.include?(:temperature)
+                td #{dt.temperature.round(2).to_s} &#8451
+              - if @props.include?(:humidity)
+                td= dt.humidity.round(2).to_s + " %"
+              - if @props.include?(:light)
+                td= dt.light.round(2).to_s + " lux"
+              - if @props.include?(:soil_moisture)
+                td= dt.soil_moisture.round(2).to_s + " %"
       #download
         = link_to 'Export To Excel', '#', class: 'btn ink-reaction btn-raised btn-accent'
         = link_to 'Export To CSV', '#', class: 'btn ink-reaction btn-raised btn-accent'
@@ -72,6 +68,8 @@ javascript:
   $('#datatable').DataTable({
     "dom": 'lCfrtip',
     "order": [],
+    "pageLength": 100,
+    "lengthMenu": [[100, 250, 500], [100, 250, 500]],
     "language": {
       "lengthMenu": '_MENU_ entries per page',
       "paginate": {
