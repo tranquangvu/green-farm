@@ -1,0 +1,13 @@
+.inspector-base-last_value
+  .row
+    - [:temperature, :humidity, :light, :soil_moisture].each do |prop|
+      .col-md-3.col-sm-6
+        .card
+          .card-body.no-padding
+            .alert.alert-callout.no-margin class="alert-#{color_by_prop(prop)}"
+              strong.pull-right.text-success.text-lg
+                = image_tag "inspecters/#{prop}.png"
+                i.md.md-trending-up
+              strong.text-xl class="text-#{color_by_prop(prop)}"
+                = show_value_by_prop(last_value, prop)
+              .opacity-50 #{prop.to_s.titleize} # #{show_date(last_value[:created_at])}

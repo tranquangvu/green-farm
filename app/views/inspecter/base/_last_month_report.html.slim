@@ -1,0 +1,21 @@
+.inspecter-base-last_month_report
+  .card
+    .card-head.style-primary
+      header Last month report
+    .card-body
+      table#datatable.table.table-striped.table-hover
+        thead
+          tr
+            th Time
+            th Temperature
+            th Humidity
+            th Light
+            th Soil Moisture
+        tbody
+          - data.each do |dt|
+            tr
+              td= show_date(dt.created_at)
+              td= show_temperature(dt.temperature)
+              td= show_humid(dt.humidity)
+              td= show_light(dt.light)
+              td= show_humid(dt.soil_moisture)

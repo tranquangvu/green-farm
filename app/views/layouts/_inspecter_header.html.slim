@@ -20,7 +20,7 @@ header#header
             - @farms.each do |farm|
               li
                 = link_to inspecter_dashboard_path(farm), class: 'alert alert-callout alert-info'
-                  = image_tag 'inspecters/farm.png', class: 'pull-right img-circle dropdown-avatar'
+                  = image_tag 'inspecters/farm.png', class: 'pull-right dropdown-avatar'
                   strong= farm.name
                   br/
                   small= truncate(farm.address, length: 25)

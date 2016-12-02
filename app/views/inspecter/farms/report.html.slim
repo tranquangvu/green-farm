@@ -43,7 +43,7 @@
                   = link_to 'Export To CSV',
                             report_inspecter_farm_path(format: 'csv', start_date: @start_date, end_date: @end_date, props: @props),
                             class: 'btn ink-reaction btn-raised btn-warning'
-      table#datatable.table.table-striped.table-hover
+      table.datatable.table.table-striped.table-hover
         thead
           tr
             th Time
@@ -69,18 +69,3 @@
                 td= dt.light.round(2).to_s + " lux"
               - if @props.include?(:soil_moisture)
                 td= dt.soil_moisture.round(2).to_s + " %"
-
-javascript:
-  $('#datatable').DataTable({
-    "dom": 'lCfrtip',
-    "order": [],
-    "pageLength": 100,
-    "lengthMenu": [[100, 250, 500], [100, 250, 500]],
-    "language": {
-      "lengthMenu": '_MENU_ entries per page',
-      "paginate": {
-        "previous": '<i class="fa fa-angle-left"></i>',
-        "next": '<i class="fa fa-angle-right"></i>'
-      }
-    }
-  });
