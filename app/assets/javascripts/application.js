@@ -12,7 +12,7 @@ $(window).on('load', function() {
   $('body').css({'overflow':'visible'});
 });
 
-$(function(){
+$(function() {
   $('#owl-sticky').owlCarousel({
     items: 3,
     itemsDesktop: [1199,3],
