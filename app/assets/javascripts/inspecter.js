@@ -19,6 +19,7 @@
 //= require rickshaw/rickshaw.min
 //= require core/source/App
 //= require core/source/AppNavigation
+//= require core/source/AppOffcanvas
 //= require core/source/AppCard
 //= require core/source/AppNavSearch
 //= require core/source/AppVendor
@@ -29,6 +30,7 @@
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require libs/circle-progress
 //= require inspector/farms/chart
+//= require inspector/base/dashboard
 
 $(function(){
   window.setTimeout(function() { $(".notice").alert('close'); }, 8000);
@@ -52,8 +54,8 @@ $(function(){
   $('.datatable').DataTable({
     "dom": 'lCfrtip',
     "order": [],
-    "pageLength": 100,
-    "lengthMenu": [[100, 250, 500], [100, 250, 500]],
+    "pageLength": 50,
+    "lengthMenu": [[50, 100, 250, 500], [50, 100, 250, 500]],
     "language": {
       "lengthMenu": '_MENU_ entries per page',
       "paginate": {
@@ -71,13 +73,13 @@ function generalChartOptions(options) {
       shadowSize: 0,
       lines: {
         show: true,
-        lineWidth: 2,
-        fill: true
+        lineWidth: options.lineWidth != null ? options.lineWidth : 2,
+        fill: options.fill === false ? false : true
       },
       points: {
         show: true,
-        radius: 3,
-        lineWidth: 2
+        radius: options.pointRadius === 0 ? 0 : 3,
+        lineWidth: options.pointLineWidth === 0 ? 0 : 2
       }
     },
     legend: {
@@ -128,13 +130,17 @@ function generalChartTooltip (event, pos, item, tooltip) {
   }
 }
 
-function drawChart(targetId, data, option) {
+function drawChart(targetId, data, options) {
   var chart = $(targetId);
       chart.css({"width": "100%"});
   var plot = $.plot(chart, data, generalChartOptions({
-        colors: option.colors,
-        textColor: option.textColor,
-        gridMargin: option.gridMargin
+        colors: options.colors,
+        textColor: options.textColor,
+        gridMargin: options.gridMargin,
+        lineWidth: options.lineWidth,
+        pointLineWidth: options.pointLineWidth,
+        pointRadius: options.pointRadius,
+        fill: options.fill
       }));
   var tooltip = {
     tip: null,

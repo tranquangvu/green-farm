@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   end
 
   namespace :inspecter do
-    get '/:farm_id', to: 'base#dashboard', as: :dashboard
+    get '/:id', to: 'base#dashboard', as: :dashboard
 
     scope :values do
       get '/temperature_of_date',   to: 'values#temperature_of_date'

@@ -1,5 +1,18 @@
 #inspecter-dashboard-container {
-  .inspector-base-last_value img {
-    width: 40px;
+  .inspector-base-last_value {
+    img {
+      width: 40px;
+    }
+  }
+
+  .inspecter-base-last_month_report {
+    .title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      margin-bottom: 10px;
+    }
   }
 }

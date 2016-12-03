@@ -46,3 +46,7 @@ header#header
             li= link_to destroy_user_session_path, method: :delete
               i.fa.fa-fw.fa-power-off.text-danger
               | Logout
+      ul.header-nav.header-nav-toggle
+        li
+          a.btn.btn-icon-toggle.btn-default data-toggle="offcanvas" href="#inspecter_right_menu"
+            i.fa.fa-ellipsis-v

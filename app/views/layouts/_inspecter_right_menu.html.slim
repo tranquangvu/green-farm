@@ -1,0 +1,27 @@
+#inspecter_right_menu.offcanvas-pane.width-8
+  .offcanvas-head
+    header.text-primary Select your gardern
+    .offcanvas-tools
+      a.btn.btn-icon-toggle.btn-default-light.pull-right data-dismiss="offcanvas"
+        i.fa.fa-times
+  .nano.has-scrollbar
+    .nano-content
+      .offcanvas-body
+        .offcanvas-body.no-padding
+          p
+            | Select a gardern which you want to view
+          p
+            | Close this off-canvas by clicking on the backdrop or press the close button in the upper right corner.
+          p  
+          h2.text-primary Your gardern list
+          ul.list
+            - @farms.each do |farm|
+              li.tile
+                = link_to inspecter_dashboard_path(farm), class: 'tile-content ink-reaction'
+                  .tile-icon
+                    = image_tag 'inspecters/plant.png'
+                  .tile-text
+                    = farm.name
+                    small= truncate(farm.address, length: 30)
+    .nano-pane
+      .nano-slider style="height: 65px; transform: translate(0px), 0px);"

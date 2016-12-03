@@ -3,19 +3,32 @@
     .card-head.style-primary
       header Last month report
     .card-body
-      table#datatable.table.table-striped.table-hover
-        thead
-          tr
-            th Time
-            th Temperature
-            th Humidity
-            th Light
-            th Soil Moisture
-        tbody
-          - data.each do |dt|
+      #download
+        .title Download:
+        .row
+          .col-sm-6
+            = link_to 'Export To Excel',
+                  report_inspecter_farm_path(format: 'xlsx', start_date: @start_date, end_date: @end_date, props: @props),
+                  class: 'btn ink-reaction btn-raised btn-accent btn-block'
+          .col-sm-6
+            = link_to 'Export To CSV',
+                  report_inspecter_farm_path(format: 'csv', start_date: @start_date, end_date: @end_date, props: @props),
+                  class: 'btn ink-reaction btn-raised btn-warning btn-block'
+      #reporter
+        .title Data Table:
+        table#last-month-report.datatable.table.table-striped.table-hover
+          thead
             tr
-              td= show_date(dt.created_at)
-              td= show_temperature(dt.temperature)
-              td= show_humid(dt.humidity)
-              td= show_light(dt.light)
-              td= show_humid(dt.soil_moisture)
+              th Time
+              th Temperature
+              th Humidity
+              th Light
+              th Soil Moisture
+          tbody
+            - data.each do |dt|
+              tr
+                td= show_date(dt.created_at)
+                td= show_temperature(dt.temperature)
+                td= show_humid(dt.humidity)
+                td= show_light(dt.light)
+                td= show_humid(dt.soil_moisture)
