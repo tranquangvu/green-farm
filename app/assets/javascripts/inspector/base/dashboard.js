@@ -1,6 +1,5 @@
 $(document).ready(function() {
   if ($("#inspecter-dashboard-container").length > 0) {
-    debugger
     var currentDate = new Date('2016-11-20'),
         farmId = $("#inspecter-dashboard-container").data('farm');
 

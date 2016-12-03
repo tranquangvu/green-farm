@@ -30,6 +30,9 @@ class Inspecter::FarmsController < Inspecter::BaseController
   def chart
   end
 
+  def settings
+  end
+
   private
 
   def set_farm

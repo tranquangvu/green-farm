@@ -3,44 +3,57 @@
     a.btn.btn-icon-toggle.btn-default.menubar-toggle data-toggle="menubar"
       i.fa.fa-bars
     .expanded
-      = link_to inspecter_dashboard_path(@farm) do
+      = link_to inspecter_dashboard_path(@farm)
         span.text-lg.text-bold.text-primary MATERIAL&nbsp;ADMIN
   .nano.has-scrollbar
     .nano-content
       .menubar-scroll-panel
         ul#main-menu.gui-controls.gui-controls-tree
-          li.active.expanded
-            = link_to inspecter_dashboard_path(@farm), class: 'active' do
+          li
+            = link_to inspecter_dashboard_path(@farm),
+              class: "#{params[:controller] == 'inspecter/base' && params[:action] == 'dashboard' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-home
               span.title Dashboard
           li
-            = link_to inspecter_farm_path(@farm) do
+            = link_to inspecter_farm_path(@farm),
+              class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'show' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-puzzle-piece.fa-fw
               span.title Inspecter
           li
-            = link_to report_inspecter_farm_path(@farm) do
+            = link_to report_inspecter_farm_path(@farm),
+              class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'report' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-print.fa-fw
               span.title Reporter
           li
-            = link_to chart_inspecter_farm_path(@farm) do
+            = link_to chart_inspecter_farm_path(@farm),
+              class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'chart' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-area-chart.fa-fw
               span.title Chart Drawing
           li
-            = link_to "#" do
+            = link_to inspecter_farm_notifications_path(@farm),
+              class: "#{params[:controller] == 'inspecter/notifications' && params[:action] == 'index' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-bell.fa-fw
-              span.title Notification
+              span.title Notifications
           li
-            = link_to "#" do
+            = link_to galleries_inspecter_farm_path(@farm),
+              class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'galleries' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-picture-o.fa-fw
-              span.title Gallery
+              span.title Galleries
           li
-            = link_to "#" do
+            = link_to inspecter_farm_camera_path(@farm, @farm.camera),
+              class: "#{params[:controller] == 'inspecter/cameras' && params[:action] == 'show' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-camera-retro.fa-fw
               span.title Camera
+          li
+            = link_to settings_inspecter_farm_path(@farm),
+              class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'settings' ? 'active' : '' }"
+              .gui-icon
+                i.fa.fa-camera-retro.fa-fw
+              span.title Settings
