@@ -4,7 +4,7 @@
       h1.pmodal-title Your Profile
     .pmodal-middle
       .pmodal-avatar
-        img alt="" src="http://i66.tinypic.com/33arjut.png"
+        = image_tag current_user.avatar.url
     .pmodal-bottom
       .pmodal-profile-detail
         p.pmodal-profile-username= current_user.username

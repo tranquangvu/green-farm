@@ -33,7 +33,7 @@ header#header
       ul.header-nav.header-nav-profile
         li.dropdown
           a.dropdown-toggle.ink-reaction data-toggle="dropdown"
-            = image_tag 'default_avatar.jpg'
+            = image_tag current_user.avatar.url
             span.profile-info
               = current_user.username
               small

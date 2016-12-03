@@ -3,7 +3,12 @@
     .pmodal-top
       h1.pmodal-title Edit Profile
     .pmodal-middle
-      = form_for @user, url: profile_path(@user), html: { method: :patch } do |f|
+      = form_for @user, url: profile_path(@user), html: { method: :patch, multipart: true } do |f|
+        #dropzone
+          .dropzone-content
+            = image_tag current_user.avatar.url
+          = f.file_field :avatar
+          = f.hidden_field :avatar_cache
         .form-group
           = f.email_field :email, placeholder: 'Email'
           - @user.errors[:email].any?
