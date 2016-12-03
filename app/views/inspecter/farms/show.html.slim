@@ -1,66 +1,45 @@
 #inspecter-farms-show-container
   .card#current-value
     .card-head.style-primary
-      header Current sensor value
+      header Realtime sensor value
     .card-body
       .row
         .col-md-3.attribute
-          .card
-            .card-head
-              | Temperature
-              span.sub-head
-              | (*C)
+          .card.card-temperature
             .card-body
-              #temp-chart.circle-chart data-size="200" data-thickness="8"
+              #temp-chart.circle-chart data-size="200" data-thickness="5"
                 .chart-center
-                  span.chart-value 32
-                  .chart-label Good
-            ul.card-footer
-              li Accepted Min: #{20}
-              li Accepted Max: #{45}
-
+                  span.chart-value 32 &#8451
+            .card-footer
+              .chart-title Temperature
+              | [20, 50]
         .col-md-3.attribute
-          .card
-            .card-head
-              | Humidity
-              span.sub-head
-                | (%)
+          .card.card-humidity
             .card-body
-              #humid-chart.circle-chart data-size="200" data-thickness="8"
+              #humid-chart.circle-chart data-size="200" data-thickness="5"
                 .chart-center
-                  span.chart-value 32
-                  .chart-label Good
-            ul.card-footer
-              li Accepted Min: #{20}
-              li Accepted Max: #{45}
+                  span.chart-value 32 %
+            .card-footer
+              .chart-title Humidity
+              | [20, 50]
         .col-md-3.attribute
-          .card
-            .card-head
-              | Bright
-              span.sub-head
-                | (Lux)
+          .card.card-light
             .card-body
-              #bright-chart.circle-chart data-size="200" data-thickness="8"
+              #bright-chart.circle-chart data-size="200" data-thickness="5"
                 .chart-center
-                  span.chart-value 32
-                  .chart-label Good
-            ul.card-footer
-              li Accepted Min: #{20}
-              li Accepted Max: #{45}
+                  span.chart-value 32 lux
+            .card-footer
+              .chart-title Light
+              | [20, 50]
         .col-md-3.attribute
-          .card
-            .card-head
-              | Soil moisture
-              span.sub-head
-              | (%)
+          .card.card-soil-moisture
             .card-body
-              #soil-moisture-chart.circle-chart data-size="200" data-thickness="8"
+              #soil-moisture-chart.circle-chart data-size="200" data-thickness="5"
                 .chart-center
-                  span.chart-value 32
-                  .chart-label Good
-            ul.card-footer
-              li Accepted Min: #{20}
-              li Accepted Max: #{45}
+                  span.chart-value 32 %
+            .card-footer
+              .chart-title Soil moisture
+              | [20, 50]
   .card#device-control-panel
     .card-head.style-primary
       header Device Control Panel
@@ -70,7 +49,7 @@
           tr
             td #
             td Name
-            td Status
+            td
         tbody
           tr
             td 1
@@ -84,12 +63,6 @@
             td
               input#switch-servo-water.switch.switch-shadow type="checkbox"
               label for="switch-servo-water"
-          tr
-            td 3
-            td Hệ thống phun sươn
-            td
-              input#switch-servo-dew.switch.switch-shadow type="checkbox"
-              label for="switch-servo-dew"
 
 javascript:
   // var socket = io('http://0.0.0.0:5001');
@@ -124,7 +97,7 @@ javascript:
     lineCap: 'round',
     value: .75,
     emptyFill: '#fafafa',
-    fill: { 'color': '#8ce196' },
+    fill: { 'color': '#ff9800' },
     animation: false
   });
 
@@ -133,7 +106,7 @@ javascript:
     lineCap: 'round',
     value: .75,
     emptyFill: '#fafafa',
-    fill: { 'color': '#8ce196' }
+    fill: { 'color': '#2196f3' }
   });
 
   $('#bright-chart').circleProgress({
@@ -141,7 +114,7 @@ javascript:
     lineCap: 'round',
     value: .75,
     emptyFill: '#fafafa',
-    fill: { 'color': '#8ce196' }
+    fill: { 'color': '#f44336' }
   });
 
   $('#soil-moisture-chart').circleProgress({
@@ -149,5 +122,5 @@ javascript:
     lineCap: 'round',
     value: .75,
     emptyFill: '#fafafa',
-    fill: { 'color': '#8ce196' }
+    fill: { 'color': '#4caf50' }
   });

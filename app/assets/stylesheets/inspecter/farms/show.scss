@@ -4,49 +4,43 @@
   }
 
   #current-value .card {
-    color: #616161;
     box-shadow: none;
-    border: 1px solid #e0e0e0;
     text-align: center;
 
-    .card-head {
-      color: #8ce196;
-      font-size: 22px;
-      line-height: 30px;
-      padding-top: 20px;
-      position: relative;
-
-      span.sub-head {
-        display: block;
-      }
-    }
-
     .card-body {
-      padding-left: 0;
-      padding-right: 0;
+      padding: 25px 0 0 0;
     }
 
     .card-footer {
-      list-style: none;
-      margin: 0;
-      padding-left: 0;
       font-size: 16px;
-      color: #313534;
-      border-top: 1px solid #e0e0e0;
+      font-size: 18px;
 
-      li {
-        padding: 10px 0;
-        border-bottom: 1px solid #e0e0e0;
-
-        &:last-child {
-          border-bottom: none;
-        }
+      .chart-title {
+        font-size: 22px;
+        font-weight: bold;
       }
+    }
+
+    &.card-temperature {
+      color: #ff9800;
+    }
+
+    &.card-humidity {
+      color: #2196f3;
+    }
+
+    &.card-light {
+      color: #f44336;
+    }
+
+    &.card-soil-moisture {
+      color: #4caf50;
     }
   }
 
   .circle-chart {
     width: 200px;
+    height: 210px;
     margin: 0 auto;
     position: relative;
 
@@ -63,12 +57,7 @@
 
       .chart-value {
         font-size: 40px;
-        color: #8ce196;
-      }
-
-      .chart-label {
-        font-size: 22px;
-        color: #b2b2b2;
+        line-height: 40px;
       }
     }
   }
@@ -78,7 +67,7 @@
       padding-top: 15px;
       padding-bottom: 15px;
       vertical-align: middle;
-      font-size: 16px;
+      font-size: 18px;
     }
   }
 }
