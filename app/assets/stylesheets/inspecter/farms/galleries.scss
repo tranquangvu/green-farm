@@ -1,0 +1,29 @@
+#inspecter-farms-galleries-container {
+  .galleries {
+    padding: .5vw;
+    @include flex-direction(column);
+    @include flex-flow(row wrap);
+    @include flexbox;
+
+    .image-container {
+      width: 200px;
+      margin: .5vw;
+      @include flex(auto);
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .galleries {
+      padding: 0;
+
+      .image-container {
+        margin: 0;
+      }
+    }
+  }
+}

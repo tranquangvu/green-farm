@@ -29,6 +29,11 @@
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require libs/circle-progress
+//= require fancyBox/lib/jquery.mousewheel-3.0.6.pack.js
+//= require fancyBox/source/jquery.fancybox.pack
+//= require fancyBox/source/helpers/jquery.fancybox-buttons
+//= require fancyBox/source/helpers/jquery.fancybox-media
+//= require fancyBox/source/helpers/jquery.fancybox-thumbs
 //= require inspector/farms/chart
 //= require inspector/base/dashboard
 
@@ -64,6 +69,10 @@ $(function(){
       }
     }
   });
+});
+
+$(document).ready(function() {
+  $("a.fancybox").fancybox();
 });
 
 function generalChartOptions(options) {

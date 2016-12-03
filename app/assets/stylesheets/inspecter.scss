@@ -12,11 +12,15 @@
 @import 'select2/dist/css/select2.min';
 @import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3';
 @import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
+@import 'fancyBox/source/jquery.fancybox';
+@import 'fancyBox/source/helpers/jquery.fancybox-buttons';
+@import 'fancyBox/source/helpers/jquery.fancybox-thumbs';
 
 @import 'inspecter/base/dashboard';
 @import 'inspecter/farms/show';
 @import 'inspecter/farms/report';
 @import 'inspecter/farms/chart';
+@import 'inspecter/farms/galleries';
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i);
