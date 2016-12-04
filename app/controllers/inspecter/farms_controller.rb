@@ -33,6 +33,14 @@ class Inspecter::FarmsController < Inspecter::BaseController
   def settings
   end
 
+  def update
+    if @farm.update(farm_params)
+      redirect_to inspecter_dashboard_path, notice: 'Updated settings successfully'
+    else
+      render :settings
+    end
+  end
+
   private
 
   def set_farm
@@ -49,5 +57,11 @@ class Inspecter::FarmsController < Inspecter::BaseController
 
   def report_params
     params.permit(:start_date, :end_date, props: [])
+  end
+
+  def farm_params
+    params.require(:farm).permit(:name, :address,
+      :max_limit_temperature, :min_limit_temperature, :max_limit_humidity, :min_limit_humidity,
+        :max_limit_soil_moisture, :min_limit_soil_moisture, :max_limit_light, :min_limit_light)
   end
 end

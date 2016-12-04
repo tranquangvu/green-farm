@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       get 'light_of_month',         to: 'values#light_of_month'
     end
 
-    resources :farms, only: [:index, :show] do
+    resources :farms, only: [:index, :show, :update] do
       member do
         get 'report'
         get 'chart'
