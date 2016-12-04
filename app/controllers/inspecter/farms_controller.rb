@@ -34,6 +34,7 @@ class Inspecter::FarmsController < Inspecter::BaseController
   end
 
   def gallery
+    @pictures = @farm.pictures
   end
 
   def update

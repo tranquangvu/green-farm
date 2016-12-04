@@ -4,18 +4,7 @@
       header Image Gallery
     .card-body
       .gallery
-        .image-container
-          = link_to 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-1.jpg', class: 'fancybox', rel: 'gallery'
-            = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-1.jpg'
-        .image-container
-          = link_to 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-2.jpg', class: 'fancybox', rel: 'gallery'
-            = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-2.jpg'
-        .image-container
-          = link_to 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-3.jpg', class: 'fancybox', rel: 'gallery'
-            = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-3.jpg'
-        .image-container
-          = link_to 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-4.jpg', class: 'fancybox', rel: 'gallery'
-            = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-4.jpg'
-        .image-container
-          = link_to 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-5.jpg', class: 'fancybox', rel: 'gallery'
-            = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-5.jpg'
+        - @pictures.each do |picture|
+          .image-container
+            = link_to picture.file.url, class: 'fancybox', rel: 'gallery'
+              = image_tag picture.file.url

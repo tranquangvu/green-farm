@@ -44,7 +44,7 @@
               class: "#{params[:controller] == 'inspecter/farms' && params[:action] == 'galleries' ? 'active' : '' }"
               .gui-icon
                 i.fa.fa-picture-o.fa-fw
-              span.title Galleries
+              span.title Gallery
           li
             = link_to inspecter_farm_camera_path(@farm, @farm.camera),
               class: "#{params[:controller] == 'inspecter/cameras' && params[:action] == 'show' ? 'active' : '' }"
