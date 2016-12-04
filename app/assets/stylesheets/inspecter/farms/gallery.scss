@@ -1,5 +1,5 @@
-#inspecter-farms-galleries-container {
-  .galleries {
+#inspecter-farms-gallery-container {
+  .gallery {
     padding: .5vw;
     @include flex-direction(column);
     @include flex-flow(row wrap);
@@ -18,7 +18,7 @@
   }
 
   @media screen and (max-width: 400px) {
-    .galleries {
+    .gallery {
       padding: 0;
 
       .image-container {

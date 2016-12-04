@@ -28,3 +28,6 @@ vendor/assets/components
 
 # ignore node modules
 /socket/node_modules
+
+# ignore public/uploads
+/public/uploads

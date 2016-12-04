@@ -14,6 +14,8 @@ class Farm
   field :max_limit_light, type: Float
   field :min_limit_light, type: Float
 
+  embeds_many :pictures, cascade_callbacks: true
+
   # associations
   belongs_to :user
   has_one :camera

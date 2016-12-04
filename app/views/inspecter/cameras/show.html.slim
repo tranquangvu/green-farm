@@ -4,7 +4,7 @@
       header Camera
     .card-body
       .camera-view
-        = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-1.jpg'
+        = image_tag @video_stream
       .camera-controls
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrows-v')
@@ -12,7 +12,7 @@
           = icon('arrow-up')
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrow-down')
-        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-lg btn-primary'
+        = link_to snapshot_inspecter_farm_camera_path(@farm, @camera, save_to_gallery: false), class: 'btn ink-reaction btn-floating-action btn-lg btn-primary', method: :post, id: 'camera-snapshot'
           = icon('camera')
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrow-left')
@@ -20,3 +20,8 @@
           = icon('arrow-right')
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrows-h')
+      .form-group
+        .checkbox-inline.checkbox-styled
+          label
+            = check_box_tag 'save_to_gallery', nil, false
+            span Save to gallery after take snapshot

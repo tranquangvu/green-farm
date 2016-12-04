@@ -50,9 +50,13 @@ Rails.application.routes.draw do
         get 'report'
         get 'chart'
         get 'settings'
-        get 'galleries'
+        get 'gallery'
       end
-      resources :cameras, only: [:show]
+      resources :cameras, only: [:show] do
+        member do
+          post 'snapshot'
+        end
+      end
       resources :notifications, only: [:index]
     end
   end

@@ -36,6 +36,7 @@
 //= require fancyBox/source/helpers/jquery.fancybox-thumbs
 //= require inspector/farms/chart
 //= require inspector/base/dashboard
+//= require inspector/cameras/show
 
 $(function(){
   window.setTimeout(function() { $(".notice").alert('close'); }, 8000);

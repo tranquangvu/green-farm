@@ -27,6 +27,14 @@ class Camera
     account[:password]
   end
 
+  def video_stream_url
+    "#{host}/videostream.cgi?user=#{username}&pwd=#{password}"
+  end
+
+  def snapshot_url
+    "#{host}/snapshot.cgi?user=#{username}&pwd=#{password}"
+  end
+
   private
 
   def account

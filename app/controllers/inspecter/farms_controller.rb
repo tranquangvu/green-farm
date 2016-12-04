@@ -33,6 +33,9 @@ class Inspecter::FarmsController < Inspecter::BaseController
   def settings
   end
 
+  def gallery
+  end
+
   def update
     if @farm.update(farm_params)
       redirect_to inspecter_dashboard_path, notice: 'Updated settings successfully'
