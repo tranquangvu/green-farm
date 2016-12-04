@@ -1,3 +1,22 @@
 #inspecter-cameras-show-container
-  h1 Camera
-  / img onload="initCameraStream(this, '#{@camera.host}', '#{@camera.username}', '#{@camera.password}')" src="#{@camera.host}/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=#{@camera.username}&pwd=#{@camera.password}&t="
+  .card
+    .card-head.style-primary
+      header Camera
+    .card-body
+      .camera-view
+        = image_tag 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-1.jpg'
+      .camera-controls
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrows-v')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrow-up')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrow-down')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-lg btn-primary'
+          = icon('camera')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrow-left')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrow-right')
+        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+          = icon('arrows-h')
