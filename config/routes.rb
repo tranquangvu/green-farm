@@ -55,6 +55,10 @@ Rails.application.routes.draw do
       resources :cameras, only: [:show] do
         member do
           post 'snapshot'
+          post 'up'
+          post 'down'
+          post 'left'
+          post 'right'
         end
       end
       resources :notifications, only: [:index]

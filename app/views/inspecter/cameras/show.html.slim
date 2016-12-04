@@ -8,15 +8,15 @@
       .camera-controls
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrows-v')
-        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+        = link_to up_inspecter_farm_camera_path(@farm, @camera), class: 'btn ink-reaction btn-floating-action btn-primary', remote: true, method: :post
           = icon('arrow-up')
-        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+        = link_to down_inspecter_farm_camera_path(@farm, @camera), class: 'btn ink-reaction btn-floating-action btn-primary', remote: true, method: :post
           = icon('arrow-down')
         = link_to snapshot_inspecter_farm_camera_path(@farm, @camera, save_to_gallery: false), class: 'btn ink-reaction btn-floating-action btn-lg btn-primary', method: :post, id: 'camera-snapshot'
           = icon('camera')
-        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+        = link_to left_inspecter_farm_camera_path(@farm, @camera), class: 'btn ink-reaction btn-floating-action btn-primary', remote: true, method: :post
           = icon('arrow-left')
-        = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
+        = link_to right_inspecter_farm_camera_path(@farm, @camera), class: 'btn ink-reaction btn-floating-action btn-primary', remote: true, method: :post
           = icon('arrow-right')
         = link_to '#', class: 'btn ink-reaction btn-floating-action btn-primary'
           = icon('arrows-h')

@@ -29,6 +29,30 @@ class Inspecter::CamerasController < Inspecter::BaseController
     end
   end
 
+  def up
+    HTTParty.get(@camera.up_url)
+    sleep(0.5)
+    HTTParty.get(@camera.stop_up_url)
+  end
+
+  def down
+    HTTParty.get(@camera.down_url)
+    sleep(0.5)
+    HTTParty.get(@camera.stop_down_url)
+  end
+
+  def left
+    HTTParty.get(@camera.left_url)
+    sleep(0.5)
+    HTTParty.get(@camera.stop_left_url)
+  end
+
+  def right
+    HTTParty.get(@camera.right_url)
+    sleep(0.5)
+    HTTParty.get(@camera.stop_right_url)
+  end
+
   private
 
   def set_camera
