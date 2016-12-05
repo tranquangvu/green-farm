@@ -9,8 +9,8 @@ $(document).ready(function() {
 
       socket.emit('client_response_connect', {
         client: true,
-        device_id: "#{@farm.device.id}",
-        device_ip: "#{@farm.device.ip}"
+        device_id: $('#current-value').data('id'),
+        device_ip: $('#current-value').data('ip')
       });
     });
 

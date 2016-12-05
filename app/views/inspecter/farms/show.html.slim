@@ -1,5 +1,5 @@
 #inspecter-farms-show-container
-  .card#current-value
+  .card#current-value data-id="#{@farm.device.id}" data-ip="#{@farm.device.ip}"
     .card-head.style-primary
       header Realtime sensor value
     .card-body
