@@ -4,42 +4,16 @@
       header Realtime sensor value
     .card-body
       .row
-        .col-md-3.attribute
-          .card.card-temperature
-            .card-body
-              #temp-chart.circle-chart data-size="200" data-thickness="5"
-                .chart-center
-                  span.chart-value 32 &#8451
-            .card-footer
-              .chart-title Temperature
-              | [20, 50]
-        .col-md-3.attribute
-          .card.card-humidity
-            .card-body
-              #humid-chart.circle-chart data-size="200" data-thickness="5"
-                .chart-center
-                  span.chart-value 32 %
-            .card-footer
-              .chart-title Humidity
-              | [20, 50]
-        .col-md-3.attribute
-          .card.card-light
-            .card-body
-              #bright-chart.circle-chart data-size="200" data-thickness="5"
-                .chart-center
-                  span.chart-value 32 lux
-            .card-footer
-              .chart-title Light
-              | [20, 50]
-        .col-md-3.attribute
-          .card.card-soil-moisture
-            .card-body
-              #soil-moisture-chart.circle-chart data-size="200" data-thickness="5"
-                .chart-center
-                  span.chart-value 32 %
-            .card-footer
-              .chart-title Soil moisture
-              | [20, 50]
+        - [:temperature, :humidity, :light, :soil_moisture].each do |prop|
+          .col-md-3.attribute
+            .card class="card-#{prop}"
+              .card-body
+                .circle-chart data-size="200" data-thickness="5" id="#{prop}-circle"
+                  .chart-center
+                    span.chart-value
+              .card-footer
+                .chart-title= prop.to_s.titleize
+                | [#{show_value_by_prop(@farm, "min_limit_#{prop}".to_sym)}, #{show_value_by_prop(@farm, "max_limit_#{prop}".to_sym)}]
   .card#device-control-panel
     .card-head.style-primary
       header Device Control Panel
@@ -63,64 +37,3 @@
             td
               input#switch-servo-water.switch.switch-shadow type="checkbox"
               label for="switch-servo-water"
-
-javascript:
-  // var socket = io('http://0.0.0.0:5001');
-
-  //   socket.on('connect', function(){
-  //     console.log('Client connected');
-
-  //     socket.emit('client_response_connect', {
-  //       client: true,
-  //       device_id: "#{@farm.device.id}"
-  //     });
-  //   });
-
-  //   socket.on('client_update_view', function(data){
-  //     var device_id = '#device-' + data.device_id;
-  //     var text = '';
-  //     text += 'Nhiet do: ' + data.temperature;
-  //     text += ' - Do am: ' + data.humidity;
-  //     text += ' - Anh sang: ' + data.light;
-  //     text += ' - Do am dat: ' + data.soil_moisture;
-
-  //     console.log(text);
-  //   });
-
-  //   socket.on('disconnect', function(){
-  //     console.log('Client disconnected');
-  //   });
-
-  // add circle chart
-  $('#temp-chart').circleProgress({
-    startAngle: 1.5 * Math.PI,
-    lineCap: 'round',
-    value: .75,
-    emptyFill: '#fafafa',
-    fill: { 'color': '#ff9800' },
-    animation: false
-  });
-
-  $('#humid-chart').circleProgress({
-    startAngle: 1.5 * Math.PI,
-    lineCap: 'round',
-    value: .75,
-    emptyFill: '#fafafa',
-    fill: { 'color': '#2196f3' }
-  });
-
-  $('#bright-chart').circleProgress({
-    startAngle: 1.5 * Math.PI,
-    lineCap: 'round',
-    value: .75,
-    emptyFill: '#fafafa',
-    fill: { 'color': '#f44336' }
-  });
-
-  $('#soil-moisture-chart').circleProgress({
-    startAngle: 1.5 * Math.PI,
-    lineCap: 'round',
-    value: .75,
-    emptyFill: '#fafafa',
-    fill: { 'color': '#4caf50' }
-  });

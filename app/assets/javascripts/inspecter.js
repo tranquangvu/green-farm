@@ -35,6 +35,7 @@
 //= require fancyBox/source/helpers/jquery.fancybox-media
 //= require fancyBox/source/helpers/jquery.fancybox-thumbs
 //= require inspector/farms/chart
+//= require inspector/farms/show
 //= require inspector/base/dashboard
 //= require inspector/cameras/show
 

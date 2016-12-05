@@ -10,15 +10,15 @@ module ApplicationHelper
   end
 
   def show_temperature(temp)
-    raw "#{temp.round(2).to_s} &#8451"
+    raw "#{temp.round(1)} &#8451"
   end
 
   def show_humid(humid)
-    "#{humid} %"
+    "#{humid.round(1)} %"
   end
 
   def show_light(light)
-    "#{light} lux"
+    "#{light.round(1)} lux"
   end
 
   def show_value_by_prop(value, prop)
@@ -42,6 +42,15 @@ module ApplicationHelper
         'danger'
       else
         'success'
+    end
+  end
+
+  def chart_data_value_by_prop(value, prop)
+    case prop
+    when :temperature, :light
+      1
+    else
+      value[prop]/100.0
     end
   end
 end
