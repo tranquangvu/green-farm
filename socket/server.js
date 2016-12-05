@@ -1,6 +1,6 @@
 var io = require('socket.io').listen(5001),
     redis = require('redis').createClient(),
-    clients = [];
+    clients = [], ls_socket_id;
 
 redis.subscribe('task');
 
@@ -12,6 +12,12 @@ io.on('connection', function(socket) {
     }
   });
 
+  socket.on('ls_response_connect', function(data) {
+    if (data.ls) {
+      ls_socket_id = socket.id
+    }
+  });
+
   socket.on('client_response_connect', function(data){
     if (data.client) {
       clients.push({
@@ -19,6 +25,10 @@ io.on('connection', function(socket) {
         device_id: data.device_id
       });
     }
+
+    io.sockets.connected[ls_socket_id].emit('get_current_value', {
+      device: {id: data.device_id, ip: data.device_ip}
+    });
   });
 
   socket.on('ls_response_current_value', function(data) {
