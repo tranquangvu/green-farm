@@ -1,33 +1,72 @@
 $(document).ready(function() {
   if ($("#inspecter-farms-show-container").length > 0) {
     var updateTimes = 0;
+    var deviceId = $('#current-value').data('id');
+    var deviceIp = $('#current-value').data('ip');
 
-    var socket = io('http://0.0.0.0:5001');
+    var socket = io('http://192.168.0.104:5001');
 
     socket.on('connect', function() {
       console.log('Client connected');
 
       socket.emit('client_response_connect', {
         client: true,
-        device_id: $('#current-value').data('id'),
-        device_ip: $('#current-value').data('ip')
+        device_id: deviceId,
+        device_ip: deviceIp
       });
     });
 
-    socket.on('client_update_view', function(data){
+    socket.on('client_update_view', function(data) {
       updateTimes++;
       animation = updateTimes == 1;
 
-      if (data) {
+      if (data.temperature) {
         drawTemperatureCircle(1.0, animation, data.temperature + "℃");
+      }
+
+      if (data.humidity) {
         drawHumidityCircle(data.humidity/100.0, animation, data.humidity + "%");
+      }
+
+      if (data.light) {
         drawLightCircle(1.0, animation, data.light + "lux");
+      }
+
+      if (data.soil_moisture) {
         drawSoilMoistureCircle(data.soil_moisture/100.0, animation, data.soil_moisture + "%");
+      }
+
+      if (data.led !== undefined) {
+        $("#switch_led").attr("checked", data.led);
+      }
+
+      if (data.servo !== undefined) {
+        $("#switch_servo").attr("checked", data.servo);
       }
     });
 
     socket.on('disconnect', function(){
       console.log('Client disconnected');
+    });
+
+    $('#switch_led').change(function(e) {
+      var status = $(this).prop('checked');
+
+      socket.emit('client_change_led', {
+        status: status,
+        device_id: deviceId,
+        device_ip: deviceIp
+      });
+    });
+
+    $('#switch_servo').change(function(event) {
+      var status = $(this).prop('checked');
+
+      socket.emit('client_change_servo', {
+        status: status,
+        device_id: deviceId,
+        device_ip: deviceIp
+      });
     });
   }
 });

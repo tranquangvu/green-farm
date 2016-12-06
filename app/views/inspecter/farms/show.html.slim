@@ -29,11 +29,11 @@
             td 1
             td Đèn chiếu sáng
             td
-              input#switch-led.switch.switch-shadow type="checkbox"
-              label for="switch-led"
+              = check_box_tag :switch_led, nil, false, class: 'switch switch-shadow'
+              = label_tag :switch_led, ''
           tr
             td 2
             td Hệ thống bơm nước
             td
-              input#switch-servo-water.switch.switch-shadow type="checkbox"
-              label for="switch-servo-water"
+              = check_box_tag :switch_servo, nil, false, class: 'switch switch-shadow'
+              = label_tag :switch_servo, ''
