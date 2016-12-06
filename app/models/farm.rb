@@ -20,6 +20,7 @@ class Farm
   belongs_to :user
   has_one :camera
   has_one :device
+  has_many :notifications
 
   delegate :values, to: :device
 
