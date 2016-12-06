@@ -2,6 +2,8 @@ var io = require('socket.io').listen(5001),
     redis = require('redis').createClient(),
     clients = [], ls_socket_id;
 
+require('events').EventEmitter.prototype._maxListeners = 0;
+
 redis.subscribe('task');
 
 io.on('connection', function(socket) {
@@ -39,6 +41,44 @@ io.on('connection', function(socket) {
     });
 
     response_socket_ids.forEach(function(socket_id){
+      io.sockets.connected[socket_id].emit('client_update_view', data);
+    });
+  });
+
+  socket.on('client_change_led', function(data) {
+    if (data.status) {
+      io.sockets.connected[ls_socket_id].emit('turn_on_led', {
+        device: {id: data.device_id, ip: data.device_ip}
+      });
+    }
+    else {
+      io.sockets.connected[ls_socket_id].emit('turn_off_led', {
+        device: {id: data.device_id, ip: data.device_ip}
+      });
+    }
+  });
+
+  socket.on('client_change_servo', function(data) {
+    if (data.status) {
+      io.sockets.connected[ls_socket_id].emit('turn_on_servo', {
+        device: {id: data.device_id, ip: data.device_ip}
+      });
+    }
+    else {
+      io.sockets.connected[ls_socket_id].emit('turn_off_servo', {
+        device: {id: data.device_id, ip: data.device_ip}
+      });
+    }
+  });
+
+  socket.on('ls_response_device_status', function(data) {
+    var response_socket_ids = clients.filter(function(client){
+      return client.device_id === data.device_id
+    }).map(function(client) {
+      return client.socket_id;
+    });
+
+    response_socket_ids.forEach(function(socket_id) {
       io.sockets.connected[socket_id].emit('client_update_view', data);
     });
   });
