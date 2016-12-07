@@ -17,6 +17,8 @@ class Value
   validates :soil_moisture, presence: true
   validates :light, presence: true
 
+  after_save :sent_notification
+
   def time
     created_at
   end
@@ -176,5 +178,43 @@ class Value
     }
 
     self.collection.aggregate([$project, $match, $group, $sort])
+  end
+
+  private
+
+  def sent_notification
+    farm = device.farm
+
+    if temperature < farm.min_limit_temperature
+      Notification.create(farm: farm, kind: 'notice', content: 'Temperature is too low.')
+    end
+
+    if temperature > farm.max_limit_temperature
+      Notification.create(farm: farm, kind: 'notice', content: 'Temperature is too high.')
+    end
+
+    if humidity < farm.min_limit_humidity
+      Notification.create(farm: farm, kind: 'notice', content: 'Humidity is too low.')
+    end
+
+    if humidity > farm.max_limit_humidity
+      Notification.create(farm: farm, kind: 'notice', content: 'Humidity is too high.')
+    end
+
+    if light < farm.min_limit_light
+      Notification.create(farm: farm, kind: 'notice', content: 'Light is too low.')
+    end
+
+    if light > farm.max_limit_light
+      Notification.create(farm: farm, kind: 'notice', content: 'Light is too high.')
+    end
+
+    if soil_moisture < farm.min_limit_soil_moisture
+      Notification.create(farm: farm, kind: 'notice', content: 'Soil moisture is too low.')
+    end
+
+    if soil_moisture > farm.max_limit_soil_moisture
+      Notification.create(farm: farm, kind: 'notice', content: 'Soil moisture is too high.')
+    end
   end
 end
