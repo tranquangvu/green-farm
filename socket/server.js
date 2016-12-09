@@ -69,6 +69,12 @@ io.on('connection', function(socket) {
     }
   });
 
+  socket.on('client_request_current_value', function(data) {
+    io.sockets.connected[ls_socket_id].emit('get_current_value', {
+      device: {id: data.device_id, ip: data.device_ip}
+    });
+  });
+
   socket.on('ls_response_device_status', function(data) {
     var response_socket_ids = clients.filter(function(client){
       return client.device_id === data.device_id

@@ -3,7 +3,6 @@ $(document).ready(function() {
     var updateTimes = 0;
     var deviceId = $('#current-value').data('id');
     var deviceIp = $('#current-value').data('ip');
-
     var socket = io('http://0.0.0.0:5001');
 
     socket.on('connect', function() {
@@ -19,6 +18,8 @@ $(document).ready(function() {
     socket.on('client_update_view', function(data) {
       updateTimes++;
       animation = updateTimes == 1;
+
+      debugger
 
       if (data.temperature !== null && data.temperature !== undefined) {
         drawTemperatureCircle(1.0, animation, data.temperature + "℃");
@@ -49,6 +50,7 @@ $(document).ready(function() {
       console.log('Client disconnected');
     });
 
+    // toogle switch led handler
     $('#switch_led').change(function(e) {
       var status = $(this).prop('checked');
 
@@ -59,6 +61,7 @@ $(document).ready(function() {
       });
     });
 
+    // toogle switch servo handler
     $('#switch_servo').change(function(event) {
       var status = $(this).prop('checked');
 
@@ -68,6 +71,14 @@ $(document).ready(function() {
         device_ip: deviceIp
       });
     });
+
+    // update value after 10 minutes
+    setInterval(function() {
+      socket.emit('client_request_current_value', {
+        device_id: deviceId,
+        device_ip: deviceIp
+      });
+    }, 60000);
   }
 });
 
