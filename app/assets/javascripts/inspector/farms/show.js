@@ -4,7 +4,7 @@ $(document).ready(function() {
     var deviceId = $('#current-value').data('id');
     var deviceIp = $('#current-value').data('ip');
 
-    var socket = io('http://192.168.0.104:5001');
+    var socket = io('http://0.0.0.0:5001');
 
     socket.on('connect', function() {
       console.log('Client connected');
@@ -20,27 +20,27 @@ $(document).ready(function() {
       updateTimes++;
       animation = updateTimes == 1;
 
-      if (data.temperature) {
+      if (data.temperature !== null && data.temperature !== undefined) {
         drawTemperatureCircle(1.0, animation, data.temperature + "℃");
       }
 
-      if (data.humidity) {
+      if (data.humidity !== null && data.humidity !== undefined) {
         drawHumidityCircle(data.humidity/100.0, animation, data.humidity + "%");
       }
 
-      if (data.light) {
+      if (data.light !== null && data.light !== undefined) {
         drawLightCircle(1.0, animation, data.light + "lux");
       }
 
-      if (data.soil_moisture) {
-        drawSoilMoistureCircle(data.soil_moisture/100.0, animation, data.soil_moisture + "%");
+      if (data.soilMoisture !== null && data.soilMoisture !== undefined) {
+        drawSoilMoistureCircle(data.soilMoisture/100.0, animation, data.soilMoisture + "%");
       }
 
-      if (data.led !== undefined) {
+      if (data.led !== null && data.led !== undefined) {
         $("#switch_led").attr("checked", data.led);
       }
 
-      if (data.servo !== undefined) {
+      if (data.servo !== null && data.servo !== undefined) {
         $("#switch_servo").attr("checked", data.servo);
       }
     });
