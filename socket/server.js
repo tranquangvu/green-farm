@@ -2,8 +2,6 @@ var io = require('socket.io').listen(5001),
     redis = require('redis').createClient(),
     clients = [], ls_socket_id;
 
-require('events').EventEmitter.prototype._maxListeners = 0;
-
 redis.subscribe('task');
 
 io.on('connection', function(socket) {
