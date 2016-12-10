@@ -2,9 +2,12 @@ class Api::V1::ProfilesController < Api::ApiController
   include Payload
 
   def show
-    render json: @response.success(current_user.as_json(
-      only: [:username, :email]
-    )), status: :ok
+    response_data = {
+      email: current_user.email,
+      username: current_user.username,
+      avatar_url: request.base_url + current_user.avatar.url
+    }
+    render json: @response.success(response_data), status: :ok
   end
 
   def update
