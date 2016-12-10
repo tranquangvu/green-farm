@@ -20,7 +20,7 @@ class Value
   after_save :sent_notification
 
   def time
-    created_at
+    created_at.strftime('%Y-%m-%d %H:%M:%S')
   end
 
   def self.to_csv(props)

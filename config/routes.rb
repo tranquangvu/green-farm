@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :farms, only: [:index, :show] do
         member do
           get 'sensor_data'
+          get 'pictures'
         end
       end
     end
