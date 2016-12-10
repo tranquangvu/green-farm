@@ -1,0 +1,8 @@
+.alert.alert-callout.alert-warning role='alert' class="#{notification.seen ? '' : 'alert-no-seen'}"
+  strong= notification.kind.titleize + "!"
+  = notification.content
+  - unless notification.seen
+    = link_to seen_inspecter_farm_notification_path(@farm, notification), class: 'close', remote: true, method: :post
+      i.fa.fa-dot-circle-o.text-info
+  .created_at
+    = notification.created_at.strftime('%Y-%m-%d %H:%M:%S')

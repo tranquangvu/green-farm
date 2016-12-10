@@ -1,0 +1,80 @@
+#inspecter-notifications-index-container {
+  .card-body {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .alert {
+    margin-bottom: 7.5px;
+
+    strong {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .close {
+      opacity: 1.0;
+    }
+
+    .created_at {
+      float: right;
+      display: inline-block;
+      margin-right: 40px;
+    }
+
+    &.alert-no-seen {
+      background: #fffde7;
+
+      .created_at {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .btn {
+    margin-bottom: 10px;
+  }
+
+  .pagination {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+
+    a {
+      color: #FFFFFF;
+      margin: 0 5px;
+      text-decoration: none;
+    }
+
+    .page {
+      display: inline-block;
+      background: #616161;
+      margin: 0 5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
+      color: #FFFFFF;
+    }
+
+    .current {
+      background: #212121;
+    }
+
+    .next, .last, .first, .prev {
+      a {
+        display: inline-block;
+        background: transparent;
+        transition: all 0.3s ease;
+        padding: 2.5px 15px;
+        border: #bfc8cd 1px solid;
+        border-radius: 4px;
+        color: #9EABB3;
+
+        &:hover {
+          color: #889093;
+          border-color: #98a0a4;
+        }
+      }
+    }
+  }
+}

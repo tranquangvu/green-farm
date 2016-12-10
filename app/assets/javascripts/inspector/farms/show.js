@@ -78,7 +78,7 @@ $(document).ready(function() {
         device_id: deviceId,
         device_ip: deviceIp
       });
-    }, 60000);
+    }, 600000);
   }
 });
 

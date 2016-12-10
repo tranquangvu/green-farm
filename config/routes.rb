@@ -61,7 +61,15 @@ Rails.application.routes.draw do
           post 'right'
         end
       end
-      resources :notifications, only: [:index]
+      resources :notifications, only: [:index] do
+        member do
+          post 'seen'
+        end
+
+        collection do
+          post 'mark_all_seen'
+        end
+      end
     end
   end
 end

@@ -5,6 +5,7 @@ class Notification
   # fields
   field :content, type: String
   field :kind, type: String
+  field :seen, type: Boolean, default: false
 
   # associations
   belongs_to :farm
@@ -12,4 +13,10 @@ class Notification
   # validations
   validates :content, presence: true
   validates :kind, presence: true
+
+  paginates_per 25
+
+  def self.not_seen
+    where(seen: false)
+  end
 end
