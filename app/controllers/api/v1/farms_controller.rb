@@ -53,6 +53,21 @@ class Api::V1::FarmsController < Api::ApiController
     render json: @response.success(response_data), status: :ok
   end
 
+  def upload_picture
+    begin
+      picture = Picture.new(upload_picture_params)
+      @farm.pictures.push(picture)
+
+      if @farm.save
+        render json: @response.success({message: 'Picture have been saved'}), status: :ok
+      else
+        render json: @response.failure({error: @farm.errors.full_messages.first}), status: :unprocessable_entity
+      end
+    ensure
+      clean_tempfile
+    end
+  end
+
   private
 
   def set_farm
@@ -66,5 +81,42 @@ class Api::V1::FarmsController < Api::ApiController
 
   def render_invalid_params
     render json: @response.failure(error: 'Invalid params'), status: :bad_request
+  end
+
+  def upload_picture_params
+    ps = params.permit(:file)
+    ps[:file] = parse_image_data(ps[:file]) if ps[:file]
+    ps
+  end
+
+  def parse_image_data(base64_image)
+    filename = "upload_#{Time.now.to_i}"
+    in_content_type, encoding, string = base64_image.split(/[:;,]/)[1..3]
+
+    @tempfile = Tempfile.new(filename)
+    @tempfile.binmode
+    @tempfile.write Base64.decode64(string)
+    @tempfile.rewind
+
+    # for security we want the actual content type, not just what was passed in
+    content_type = `file --mime -b #{@tempfile.path}`.split(";")[0]
+
+    # we will also add the extension ourselves based on the above
+    # if it's not gif/jpeg/png, it will fail the validation in the upload model
+    extension = content_type.match(/gif|jpeg|png/).to_s
+    filename += ".#{extension}" if extension
+
+    ActionDispatch::Http::UploadedFile.new({
+      tempfile: @tempfile,
+      content_type: content_type,
+      filename: filename
+    })
+  end
+
+  def clean_tempfile
+    if @tempfile
+      @tempfile.close
+      @tempfile.unlink
+    end
   end
 end

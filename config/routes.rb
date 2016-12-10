@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         member do
           get 'sensor_data'
           get 'pictures'
+          post 'upload_picture'
         end
       end
     end
