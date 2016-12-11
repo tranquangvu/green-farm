@@ -17,29 +17,39 @@ class Api::V1::FarmsController < Api::ApiController
   end
 
   def sensor_data
-    start_date = sensor_data_params[:start_date]
-    end_date = sensor_data_params[:end_date]
+    time = sensor_data_params[:time]
+    type = sensor_data_params[:type]
     prop = sensor_data_params[:prop]
-
-    begin
-      Date.parse(start_date)
-      Date.parse(end_date)
-    rescue
-      return render_invalid_params
-    end
 
     unless prop.in?(%w(temperature humidity light soil_moisture))
       return render_invalid_params
     end
 
-    response_data = @farm.values.where(
-      :created_at.gte => "#{start_date} 00:00:00",
-      :created_at.lte => "#{end_date} 23:59:59"
-    ).as_json(
-      only: [prop.to_sym],
-      methods: [:time]
-    )
+    time = Time.at(time.to_i/1000)
 
+    if type.to_i == 0
+      query_result = Value.avg_in_hour_of_date(
+        device_id: @farm.device.id,
+        year: time.year,
+        month: time.month,
+        day: time.day,
+        prop: prop
+      )
+    else
+      query_result = Value.avg_in_hour_of_month(
+        device_id: @farm.device.id,
+        year: time.year,
+        month: time.month,
+        prop: prop
+      )
+    end
+
+    response_data = query_result.map do |record|
+      {
+        "time" => record[:_id][:hour],
+        "#{prop}" => record[prop.to_sym].round(2)
+      }
+    end
     render json: @response.success(response_data), status: :ok
   end
 
@@ -76,7 +86,7 @@ class Api::V1::FarmsController < Api::ApiController
   end
 
   def sensor_data_params
-    params.permit(:start_date, :end_date, :prop)
+    params.permit(:time, :prop, :type)
   end
 
   def render_invalid_params
