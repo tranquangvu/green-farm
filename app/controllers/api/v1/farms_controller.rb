@@ -113,7 +113,7 @@ class Api::V1::FarmsController < Api::ApiController
 
     # we will also add the extension ourselves based on the above
     # if it's not gif/jpeg/png, it will fail the validation in the upload model
-    extension = content_type.match(/gif|jpeg|png/).to_s
+    extension = content_type.match(/gif|jpeg|png|jpg/).to_s
     filename += ".#{extension}" if extension
 
     ActionDispatch::Http::UploadedFile.new({
