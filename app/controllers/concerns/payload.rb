@@ -2,9 +2,16 @@ module Payload
   private
 
   def payload(user)
-    return { auth_token: JsonWebToken.encode({ user_id: user.id.to_s }, secret(user)),
-             user: { id: user.id.to_s, email: user.email, avatar_url: request.base_url + user.avatar.url },
-             uid: user.uid } if user && user.id
+    return {
+      auth_token: JsonWebToken.encode({ user_id: user.id.to_s }, secret(user)),
+      user: {
+        id: user.id.to_s,
+        email: user.email,
+        username: user.username,
+        avatar_url: request.base_url + user.avatar.url
+      },
+      uid: user.uid
+    } if user && user.id
   end
 
   def secret(user)
