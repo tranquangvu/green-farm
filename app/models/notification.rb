@@ -16,7 +16,16 @@ class Notification
 
   paginates_per 25
 
+  # triggers
+  after_save :send_notification
+
   def self.not_seen
     where(seen: false)
+  end
+
+  private
+
+  def send_notification
+    SendNotificationJob.perform_now(self)
   end
 end

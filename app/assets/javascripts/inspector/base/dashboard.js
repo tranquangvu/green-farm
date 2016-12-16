@@ -27,7 +27,9 @@ $(document).ready(function() {
           lineWidth: 1,
           pointLineWidth: 1,
           pointRadius: 0,
-          fill: false
+          fill: false,
+          yMin: 0,
+          yMax: 50
         });
       },
       error: function (err) {
@@ -60,7 +62,9 @@ $(document).ready(function() {
           lineWidth: 1,
           pointLineWidth: 1,
           pointRadius: 0,
-          fill: false
+          fill: false,
+          yMin: 0,
+          yMax: 100
         });
       },
       error: function (err) {
@@ -93,7 +97,9 @@ $(document).ready(function() {
           lineWidth: 1,
           pointLineWidth: 1,
           pointRadius: 0,
-          fill: false
+          fill: false,
+          yMin: 0,
+          yMax: 1000
         });
       },
       error: function (err) {
@@ -126,7 +132,9 @@ $(document).ready(function() {
           lineWidth: 1,
           pointLineWidth: 1,
           pointRadius: 0,
-          fill: false
+          fill: false,
+          yMin: 0,
+          yMax: 100
         });
       },
       error: function (err) {

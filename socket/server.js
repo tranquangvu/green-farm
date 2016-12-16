@@ -44,6 +44,8 @@ io.on('connection', function(socket) {
   });
 
   socket.on('client_change_led', function(data) {
+    console.log(data);
+
     if (data.status) {
       io.sockets.connected[ls_socket_id].emit('turn_on_led', {
         device: {id: data.device_id, ip: data.device_ip}
@@ -76,6 +78,8 @@ io.on('connection', function(socket) {
   });
 
   socket.on('ls_response_device_status', function(data) {
+    console.log(data);
+
     var response_socket_ids = clients.filter(function(client){
       return client.device_id === data.device_id
     }).map(function(client) {

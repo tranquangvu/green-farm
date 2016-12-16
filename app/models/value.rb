@@ -17,7 +17,7 @@ class Value
   validates :soil_moisture, presence: true
   validates :light, presence: true
 
-  after_save :sent_notification
+  after_save :save_notification
 
   def time
     created_at.strftime('%Y-%m-%d %H:%M:%S')
@@ -235,7 +235,7 @@ class Value
 
   private
 
-  def sent_notification
+  def save_notification
     farm = device.farm
 
     if temperature < farm.min_limit_temperature
