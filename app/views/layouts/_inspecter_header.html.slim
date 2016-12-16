@@ -10,26 +10,6 @@ header#header
           a.btn.btn-icon-toggle.menubar-toggle data-toggle="menubar"
             i.fa.fa-bars
     .headerbar-right
-      ul.header-nav.header-nav-options
-        li.dropdown.hidden-xs
-          a.btn.btn-icon-toggle.btn-default data-toggle="dropdown"
-            i.fa.fa-bell
-            sup.badge.style-danger= @farms.count
-          ul.dropdown-menu.animation-expand
-            li.dropdown-header Quản lý vườn
-            - @farms.each do |farm|
-              li
-                = link_to inspecter_dashboard_path(farm), class: 'alert alert-callout alert-info'
-                  = image_tag 'inspecters/farm.png', class: 'pull-right dropdown-avatar'
-                  strong= farm.name
-                  br/
-                  small= truncate(farm.address, length: 25)
-            li.dropdown-header Options
-            li
-              = link_to '#'
-                | Xem tất cả
-                span.pull-right
-                  i.fa.fa-arrow-right
       ul.header-nav.header-nav-profile
         li.dropdown
           a.dropdown-toggle.ink-reaction data-toggle="dropdown"

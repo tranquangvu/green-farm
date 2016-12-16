@@ -26,8 +26,9 @@ vendor/assets/components
 /.byebug_history
 /.env
 
-# ignore node modules
+# ignore socket file
 /socket/node_modules
+/socket/dump.rdb
 
 # ignore public/uploads
 /public/uploads

@@ -6,6 +6,7 @@ class Inspecter::FarmsController < Inspecter::BaseController
   end
 
   def show
+    @last_value = @farm.values.last
   end
 
   def report

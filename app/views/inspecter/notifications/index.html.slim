@@ -1,8 +1,9 @@
 #inspecter-notifications-index-container
   .card
     .card-head.style-primary
-      header Notifications
+      header Your Notifications
     .card-body
-      .alert.alert-callout.alert-success role="alert"
-        strong Well done!
-        | You successfully read this important alert message.
+      = link_to 'Mark all as read', mark_all_seen_inspecter_farm_notifications_path(@farm), class: 'btn ink-reaction btn-raised btn-accent-dark btn-block', remote: true, method: :post
+      #notifications-list
+        = render @notifications
+      = paginate @notifications

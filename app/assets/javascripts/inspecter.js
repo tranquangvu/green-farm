@@ -35,6 +35,7 @@
 //= require fancyBox/source/helpers/jquery.fancybox-media
 //= require fancyBox/source/helpers/jquery.fancybox-thumbs
 //= require inspector/farms/chart
+//= require inspector/farms/show
 //= require inspector/base/dashboard
 //= require inspector/cameras/show
 
@@ -88,7 +89,7 @@ function generalChartOptions(options) {
       },
       points: {
         show: true,
-        radius: options.pointRadius === 0 ? 0 : 3,
+        radius: options.pointRadius === 0 ? 0 : 2,
         lineWidth: options.pointLineWidth === 0 ? 0 : 2
       }
     },
@@ -103,7 +104,9 @@ function generalChartOptions(options) {
       font: {color: options.textColor || '#000'}
     },
     yaxis: {
-      font: {color: options.textColor || '#000'}
+      font: {color: options.textColor || '#000'},
+      min: options.yMin,
+      max: options.yMax
     },
     grid: {
       borderWidth: 0,
@@ -150,7 +153,9 @@ function drawChart(targetId, data, options) {
         lineWidth: options.lineWidth,
         pointLineWidth: options.pointLineWidth,
         pointRadius: options.pointRadius,
-        fill: options.fill
+        fill: options.fill,
+        yMin: options.yMin,
+        yMax: options.yMax,
       }));
   var tooltip = {
     tip: null,

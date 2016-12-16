@@ -59,7 +59,9 @@ $(document).ready(function() {
             });
             drawChart("#temperature-chart", [{label: 'Temperature', data: timeData}], {
               colors: ['#0aa89e'],
-              textColor: '#313534'
+              textColor: '#313534',
+              yMin: 0,
+              yMax: 50
             });
             temperatureChartArea.removeClass('hide');
           },
@@ -97,7 +99,9 @@ $(document).ready(function() {
             drawChart("#humidity-chart", [{label: 'Humidity', data: timeData}], {
               colors: ['#2196f3'],
               textColor: '#313534',
-              gridMargin: -8
+              gridMargin: -8,
+              yMin: 0,
+              yMax: 100
             });
             humidityChartArea.removeClass('hide');
           },
@@ -135,7 +139,9 @@ $(document).ready(function() {
             drawChart("#light-chart", [{label: 'Light', data: timeData}], {
               colors: ['#FFC107'],
               textColor: '#313534',
-              gridMargin: -15
+              gridMargin: -15,
+              yMin: 0,
+              yMax: 1000
             });
             lightChartArea.removeClass('hide');
           },
@@ -172,7 +178,9 @@ $(document).ready(function() {
             drawChart("#soil_moisture-chart", [{label: 'Soil Moisture', data: timeData}], {
               colors: ['#9C27B0'],
               textColor: '#313534',
-              gridMargin: -8
+              gridMargin: -8,
+              yMin: 0,
+              yMax: 100
             });
             soilMoistureChartArea.removeClass('hide');
           },

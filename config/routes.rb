@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       resources :farms, only: [:index, :show] do
         member do
           get 'sensor_data'
+          get 'pictures'
+          post 'upload_picture'
         end
       end
     end
@@ -61,7 +63,15 @@ Rails.application.routes.draw do
           post 'right'
         end
       end
-      resources :notifications, only: [:index]
+      resources :notifications, only: [:index] do
+        member do
+          post 'seen'
+        end
+
+        collection do
+          post 'mark_all_seen'
+        end
+      end
     end
   end
 end
