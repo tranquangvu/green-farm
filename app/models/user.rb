@@ -38,7 +38,7 @@ class User
   mount_uploader :avatar, AvatarUploader
 
   # asssocations
-  has_many :farms
+  has_many :farms, dependent: :destroy
 
   # triggers
   before_create :set_authenticatable

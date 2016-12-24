@@ -12,10 +12,20 @@ class Value
   belongs_to :device
 
   # validations
-  validates :temperature, presence: true
-  validates :humidity, presence: true
-  validates :soil_moisture, presence: true
-  validates :light, presence: true
+  validates :temperature,
+            presence: true,
+            allow_nil: true,
+            numericality: { less_than: 50 }
+  validates :humidity,
+            presence: true,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :soil_moisture,
+            presence: true,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :light,
+            presence: true
 
   after_save :save_notification
 

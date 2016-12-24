@@ -4,35 +4,55 @@
       header Settings
     .card-body
       = form_for [:inspecter, @farm], html: {class: 'form'} do |f|
-        .form-group
+        .form-group class="#{@farm.errors[:name].any? ? 'has-error' : nil}"
           = f.text_field :name, class: 'form-control'
+          - if @farm.errors[:name].any?
+            span.help-block= @farm.errors.full_messages_for(:name).first
           = f.label :name, 'Gardern name'
-        .form-group
-          = f.text_field :name, class: 'form-control'
-          = f.label :name, 'Gardern address'
-        .form-group
-          = f.number_field :min_limit_temperature, class: 'form-control'
+        .form-group class="#{@farm.errors[:address].any? ? 'has-error' : nil}"
+          = f.text_field :address, class: 'form-control'
+          - if @farm.errors[:address].any?
+            span.help-block= @farm.errors.full_messages_for(:address).first
+          = f.label :address, 'Gardern address'
+        .form-group class="#{@farm.errors[:min_limit_temperature].any? ? 'has-error' : nil}"
+          = f.number_field :min_limit_temperature, class: 'form-control', step: 'any'
+          - if @farm.errors[:min_limit_temperature].any?
+            span.help-block= @farm.errors.full_messages_for(:min_limit_temperature).first
           = f.label :min_limit_temperature, raw('Minimum Temperature (&#8451)')
-        .form-group
+        .form-group class="#{@farm.errors[:max_limit_temperature].any? ? 'has-error' : nil}"
           = f.number_field :max_limit_temperature, class: 'form-control'
+          - if @farm.errors[:max_limit_temperature].any?
+            span.help-block= @farm.errors.full_messages_for(:max_limit_temperature).first
           = f.label :max_limit_temperature, raw('Maximum Temperature (&#8451)')
-        .form-group
+        .form-group class="#{@farm.errors[:min_limit_humidity].any? ? 'has-error' : nil}"
           = f.number_field :min_limit_humidity, class: 'form-control'
+          - if @farm.errors[:min_limit_humidity].any?
+            span.help-block= @farm.errors.full_messages_for(:min_limit_humidity).first
           = f.label :min_limit_humidity, 'Minimum Humidity (%)'
-        .form-group
+        .form-group class="#{@farm.errors[:max_limit_humidity].any? ? 'has-error' : nil}"
           = f.number_field :max_limit_humidity, class: 'form-control'
+          - if @farm.errors[:min_limit_humidity].any?
+            span.help-block= @farm.errors.full_messages_for(:max_limit_humidity).first
           = f.label :max_limit_humidity, 'Maximum Humidity (%)'
-        .form-group
+        .form-group class="#{@farm.errors[:min_limit_light].any? ? 'has-error' : nil}"
           = f.number_field :min_limit_light, class: 'form-control'
+          - if @farm.errors[:min_limit_light].any?
+            span.help-block= @farm.errors.full_messages_for(:min_limit_light).first
           = f.label :min_limit_light, 'Minimum Light (lux)'
-        .form-group
+        .form-group class="#{@farm.errors[:max_limit_light].any? ? 'has-error' : nil}"
           = f.number_field :max_limit_light, class: 'form-control'
           = f.label :max_limit_light, 'Maximum Light (lux)'
-        .form-group
+          - if @farm.errors[:max_limit_light].any?
+          span.help-block= @farm.errors.full_messages_for(:max_limit_light).first
+        .form-group class="#{@farm.errors[:min_limit_soil_moisture].any? ? 'has-error' : nil}"
           = f.number_field :min_limit_soil_moisture, class: 'form-control'
+          - if @farm.errors[:min_limit_soil_moisture].any?
+            span.help-block= @farm.errors.full_messages_for(:min_limit_soil_moisture).first
           = f.label :min_limit_soil_moisture, 'Minimum Soil Moisture (%)'
-        .form-group
+        .form-group class="#{@farm.errors[:max_limit_soil_moisture].any? ? 'has-error' : nil}"
           = f.number_field :max_limit_soil_moisture, class: 'form-control'
+          - if @farm.errors[:max_limit_soil_moisture].any?
+            span.help-block= @farm.errors.full_messages_for(:max_limit_soil_moisture).first
           = f.label :max_limit_soil_moisture, 'Maximum Soil Moisture (%)'
         .form-group
           = f.submit 'Submit', class: 'btn ink-reaction btn-raised btn-lg btn-block btn-primary'

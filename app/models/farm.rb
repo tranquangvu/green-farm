@@ -18,13 +18,33 @@ class Farm
 
   # associations
   belongs_to :user
-  has_one :camera
-  has_one :device
-  has_many :notifications
+  has_one :camera, dependent: :destroy
+  has_one :device, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   delegate :values, to: :device
 
   # validations
-  validates :name, presence: true
-  validates :address, presence: true
+  validates :name,
+            presence: true
+  validates :address,
+            presence: true
+  validates :max_limit_temperature,
+            allow_nil: true,
+            numericality: { less_than: 50 }
+  validates :min_limit_temperature,
+            allow_nil: true,
+            numericality: { less_than: 50 }
+  validates :max_limit_humidity,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :min_limit_humidity,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :max_limit_soil_moisture,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :min_limit_soil_moisture,
+            allow_nil: true,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 end
