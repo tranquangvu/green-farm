@@ -1,14 +1,16 @@
-var io = require('socket.io').listen(5001),
+var port = 5001,
+    io = require('socket.io').listen(port),
     redis = require('redis').createClient(),
     clients = [], ls_socket_id;
 
 redis.subscribe('task');
+console.log(`SOCKET IS LISTENING ON PORT: ${port}`);
 
 io.on('connection', function(socket) {
   redis.on('message', function(channel, message) {
     if (channel === 'task') {
       var message = JSON.parse(message);
-      socket.emit(message.task, message.data);
+      io.sockets.connected[ls_socket_id].emit(message.task, message.data);
     }
   });
 
@@ -18,7 +20,7 @@ io.on('connection', function(socket) {
     }
   });
 
-  socket.on('client_response_connect', function(data){
+  socket.on('client_response_connect', function(data) {
     if (data.client) {
       clients.push({
         socket_id: socket.id,
@@ -44,8 +46,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('client_change_led', function(data) {
-    console.log(data);
-
     if (data.status) {
       io.sockets.connected[ls_socket_id].emit('turn_on_led', {
         device: {id: data.device_id, ip: data.device_ip}
@@ -78,8 +78,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('ls_response_device_status', function(data) {
-    console.log(data);
-
     var response_socket_ids = clients.filter(function(client){
       return client.device_id === data.device_id
     }).map(function(client) {

@@ -3,8 +3,8 @@ class UidSecret
   include Mongoid::Timestamps
 
   # fields
-  field :uid, type: String
-  field :secret, type: String
+  field :uid,     type: String
+  field :secret,  type: String
 
   # validations
   validates :uid, presence: true

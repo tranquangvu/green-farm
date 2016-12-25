@@ -65,7 +65,7 @@ class Inspecter::FarmsController < Inspecter::BaseController
   end
 
   def farm_params
-    params.require(:farm).permit(:name, :address,
+    params.require(:farm).permit(:name, :address, :auto_control,
       :max_limit_temperature, :min_limit_temperature, :max_limit_humidity, :min_limit_humidity,
         :max_limit_soil_moisture, :min_limit_soil_moisture, :max_limit_light, :min_limit_light)
   end

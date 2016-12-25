@@ -6,20 +6,24 @@ Camera.delete_all
 Value.delete_all
 
 puts '--> Seed'
-user = User.create(
-  email: 't@e.com',
-  username: 'ben',
-  password: '123123'
-)
+user = User.create(email: 't@e.com', username: 'ben', password: '123123')
+admin = Admin.create(email: 'admin@sgardern.com', password: '123123')
 
 farm = user.farms.create(
   name: 'SGardern',
-  address: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  address: 'HCMC University of Technology',
+  max_limit_temperature: 40,
+  min_limit_temperature: 20,
+  max_limit_humidity: 70,
+  min_limit_humidity: 30,
+  max_limit_light: 500,
+  min_limit_light: 200,
+  max_limit_soil_moisture: 90,
+  min_limit_soil_moisture: 40,
+  auto_control: true
 )
 
-device = farm.create_device(
-  ip: '192.168.0.117'
-)
+device = farm.create_device(ip: '192.168.0.117')
 
 camera = farm.create_camera(CameraCreating.build(
   ip: 'http://192.168.0.220',
@@ -41,6 +45,6 @@ start_time = Time.parse('2016-11-01 00:00:00')
     temperature: temperature,
     soil_moisture: soil_moisture,
     created_at: start_time + time*10.minutes,
-    device: device,
+    device: device
   )
 end

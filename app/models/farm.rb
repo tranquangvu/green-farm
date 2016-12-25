@@ -3,16 +3,17 @@ class Farm
   include Mongoid::Timestamps
 
   # fields
-  field :name, type: String
-  field :address, type: String
-  field :max_limit_temperature, type: Float
-  field :min_limit_temperature, type: Float
-  field :max_limit_humidity, type: Float
-  field :min_limit_humidity, type: Float
+  field :name,                    type: String
+  field :address,                 type: String
+  field :max_limit_temperature,   type: Float
+  field :min_limit_temperature,   type: Float
+  field :max_limit_humidity,      type: Float
+  field :min_limit_humidity,      type: Float
   field :max_limit_soil_moisture, type: Float
   field :min_limit_soil_moisture, type: Float
-  field :max_limit_light, type: Float
-  field :min_limit_light, type: Float
+  field :max_limit_light,         type: Float
+  field :min_limit_light,         type: Float
+  field :auto_control,            type: Boolean, default: false
 
   embeds_many :pictures, cascade_callbacks: true
   accepts_nested_attributes_for :pictures
@@ -22,7 +23,6 @@ class Farm
   has_one :camera, dependent: :destroy
   has_one :device, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
   delegate :values, to: :device
 
   # validations
