@@ -15,6 +15,7 @@ class Farm
   field :min_limit_light, type: Float
 
   embeds_many :pictures, cascade_callbacks: true
+  accepts_nested_attributes_for :pictures
 
   # associations
   belongs_to :user

@@ -14,18 +14,20 @@ class Value
   # validations
   validates :temperature,
             presence: true,
-            allow_nil: true,
+            allow_nil: false,
             numericality: { less_than: 50 }
   validates :humidity,
             presence: true,
-            allow_nil: true,
+            allow_nil: false,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validates :soil_moisture,
             presence: true,
-            allow_nil: true,
+            allow_nil: false,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validates :light,
-            presence: true
+            presence: true,
+            allow_nil: false,
+            numericality: true
 
   after_save :save_notification
 
