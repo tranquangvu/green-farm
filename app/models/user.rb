@@ -9,6 +9,7 @@ class User
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
   field :uid,                type: String, default: ""
+  field :admin,              type: Boolean, default: false
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -45,6 +46,10 @@ class User
 
   # validations
   validates :username, presence: true, length: { minimum: 3, maximum: 15 }
+
+  def current_admin
+    current_user && current_user.admin?
+  end
 
   private
 
