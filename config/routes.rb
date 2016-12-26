@@ -32,6 +32,14 @@ Rails.application.routes.draw do
           post 'upload_picture'
         end
       end
+      resources :cameras, only: [] do
+        member do
+          post 'up'
+          post 'down'
+          post 'left'
+          post 'right'
+        end
+      end
     end
   end
 
