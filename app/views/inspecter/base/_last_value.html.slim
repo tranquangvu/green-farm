@@ -10,4 +10,4 @@
                 i.md.md-trending-up
               strong.text-xl class="text-#{color_by_prop(prop)}"
                 = show_value_by_prop(last_value, prop)
-              .opacity-50 #{prop.to_s.titleize} # #{show_date(last_value[:created_at])}
+              .opacity-50 #{prop.to_s.titleize} # #{show_date(last_value.created_at)}
