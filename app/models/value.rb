@@ -63,19 +63,19 @@ class Value
     $project = {
       "$project" => {
         "year" => {
-          "$year" => "$created_at"
+          "$year" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "month" => {
-          "$month" => "$created_at"
+          "$month" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "day" => {
-          "$dayOfMonth" => "$created_at"
+          "$dayOfMonth" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "hour" => {
-          "$hour" => "$created_at"
+          "$hour" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "minute" => {
-          "$minute" => "$created_at"
+          "$minute" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
@@ -98,16 +98,16 @@ class Value
     $project = {
       "$project" => {
         "year" => {
-          "$year" => "$created_at"
+          "$year" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "month" => {
-          "$month" => "$created_at"
+          "$month" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "day" => {
-          "$dayOfMonth" => "$created_at"
+          "$dayOfMonth" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "hour" => {
-          "$hour" => "$created_at"
+          "$hour" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
@@ -151,13 +151,13 @@ class Value
     $project = {
       "$project" => {
         "year" => {
-          "$year" => "$created_at"
+          "$year" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "month" => {
-          "$month" => "$created_at"
+          "$month" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "hour" => {
-          "$hour" => "$created_at"
+          "$hour" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",
@@ -199,16 +199,16 @@ class Value
     $project = {
       "$project" => {
         "year" => {
-          "$year" => "$created_at"
+          "$year" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "month" => {
-          "$month" => "$created_at"
+          "$month" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "hour" => {
-          "$hour" => "$created_at"
+          "$hour" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "minute" => {
-          "$minute" => "$created_at"
+          "$minute" => { "$add" => ["$created_at", 7 * 60 * 60 * 1000] }
         },
         "device_id" => "$device_id",
         "#{prop}" => "$#{prop}",

@@ -50,20 +50,25 @@ $(document).ready(function() {
             day: isPerDay ? date.getDate() : null
           },
           success: function (data) {
-            var timeData = data.map(function(dt) {
-              var date = new Date(
-                dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
-                dt.hour + ':' + dt.minute + ':00'
-              );
-              return [date.getTime(), dt.temperature]
-            });
-            drawChart("#temperature-chart", [{label: 'Temperature', data: timeData}], {
-              colors: ['#0aa89e'],
-              textColor: '#313534',
-              yMin: 0,
-              yMax: 50
-            });
-            temperatureChartArea.removeClass('hide');
+            if (data.length == 0){
+              temperatureChartArea.addClass('hide');
+            }
+            else {
+              var timeData = data.map(function(dt) {
+                var date = new Date(
+                  dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+                  dt.hour + ':' + dt.minute + ':00'
+                );
+                return [date.getTime(), dt.temperature]
+              });
+              drawChart("#temperature-chart", [{label: 'Temperature', data: timeData}], {
+                colors: ['#0aa89e'],
+                textColor: '#313534',
+                yMin: 0,
+                yMax: 50
+              });
+              temperatureChartArea.removeClass('hide');
+            }
           },
           error: function (err) {
             console.log(err);
@@ -89,21 +94,26 @@ $(document).ready(function() {
             day: isPerDay ? date.getDate() : null
           },
           success: function (data) {
-            var timeData = data.map(function(dt) {
-              var date = new Date(
-                dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
-                dt.hour + ':' + dt.minute + ':00'
-              );
-              return [date.getTime(), dt.humidity]
-            });
-            drawChart("#humidity-chart", [{label: 'Humidity', data: timeData}], {
-              colors: ['#2196f3'],
-              textColor: '#313534',
-              gridMargin: -8,
-              yMin: 0,
-              yMax: 100
-            });
-            humidityChartArea.removeClass('hide');
+            if (data.length == 0) {
+              humidityChartArea.addClass('hide');
+            }
+            else {
+              var timeData = data.map(function(dt) {
+                var date = new Date(
+                  dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+                  dt.hour + ':' + dt.minute + ':00'
+                );
+                return [date.getTime(), dt.humidity]
+              });
+              drawChart("#humidity-chart", [{label: 'Humidity', data: timeData}], {
+                colors: ['#2196f3'],
+                textColor: '#313534',
+                gridMargin: -8,
+                yMin: 0,
+                yMax: 100
+              });
+              humidityChartArea.removeClass('hide');
+            }
           },
           error: function (err) {
             console.log(err);
@@ -129,21 +139,26 @@ $(document).ready(function() {
             day: isPerDay ? date.getDate() : null
           },
           success: function (data) {
-            var timeData = data.map(function(dt) {
-              var date = new Date(
-                dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
-                dt.hour + ':' + dt.minute + ':00'
-              );
-              return [date.getTime(), dt.light]
-            });
-            drawChart("#light-chart", [{label: 'Light', data: timeData}], {
-              colors: ['#FFC107'],
-              textColor: '#313534',
-              gridMargin: -15,
-              yMin: 0,
-              yMax: 1000
-            });
-            lightChartArea.removeClass('hide');
+            if (data.length == 0) {
+              lightChartArea.addClass('hide');
+            }
+            else {
+              var timeData = data.map(function(dt) {
+                var date = new Date(
+                  dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+                  dt.hour + ':' + dt.minute + ':00'
+                );
+                return [date.getTime(), dt.light]
+              });
+              drawChart("#light-chart", [{label: 'Light', data: timeData}], {
+                colors: ['#FFC107'],
+                textColor: '#313534',
+                gridMargin: -15,
+                yMin: 0,
+                yMax: 1000
+              });
+              lightChartArea.removeClass('hide');
+            }
           },
           error: function (err) {
             console.log(err);
@@ -168,21 +183,27 @@ $(document).ready(function() {
             day: isPerDay ? date.getDate() : null
           },
           success: function (data) {
-            var timeData = data.map(function(dt) {
-              var date = new Date(
-                dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
-                dt.hour + ':' + dt.minute + ':00'
-              );
-              return [date.getTime(), dt.soil_moisture]
-            });
-            drawChart("#soil_moisture-chart", [{label: 'Soil Moisture', data: timeData}], {
-              colors: ['#9C27B0'],
-              textColor: '#313534',
-              gridMargin: -8,
-              yMin: 0,
-              yMax: 100
-            });
-            soilMoistureChartArea.removeClass('hide');
+            if (data.length == 0) {
+              soilMoistureChartArea.addClass('hide');
+              alert("There are no data to draw chart. Please try again.");
+            }
+            else {
+              var timeData = data.map(function(dt) {
+                var date = new Date(
+                  dt.year + '-' + dt.month + (dt.day ? '-' + dt.day : '') + ' ' +
+                  dt.hour + ':' + dt.minute + ':00'
+                );
+                return [date.getTime(), dt.soil_moisture]
+              });
+              drawChart("#soil_moisture-chart", [{label: 'Soil Moisture', data: timeData}], {
+                colors: ['#9C27B0'],
+                textColor: '#313534',
+                gridMargin: -8,
+                yMin: 0,
+                yMax: 100
+              });
+              soilMoistureChartArea.removeClass('hide');
+            }
           },
           error: function (err) {
             console.log(err);

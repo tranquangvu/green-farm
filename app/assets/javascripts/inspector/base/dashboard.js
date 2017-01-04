@@ -1,6 +1,6 @@
 $(document).ready(function() {
   if ($("#inspecter-dashboard-container").length > 0) {
-    var currentDate = new Date('2016-11-20'),
+    var currentDate = new Date(),
         farmId = $("#inspecter-dashboard-container").data('farm');
 
     // draw temperature chart
